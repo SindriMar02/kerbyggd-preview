@@ -13,7 +13,7 @@
 <link rel="preload" href="assets/fonts/PinyonScript-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/HostGrotesk-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/HostGrotesk-600.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/img/suite-kitchen@1440.webp" as="image" type="image/webp" media="(min-width: 768px)">
+<link rel="preload" href="assets/img/suite-aerial@1440.webp" as="image" type="image/webp" media="(min-width: 768px)">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Accommodation","name":"The suite, Kerbyggð","description":"The two bedroom suite house is the newest addition to Kerbyggð and the most luxurious. Two ensuite bedrooms for four, and the largest terrace of the four houses.","floorSize":{"@type":"QuantitativeValue","value":93,"unitCode":"MTK"},"occupancy":{"@type":"QuantitativeValue","maxValue":4},"address":{"@type":"PostalAddress","streetAddress":"Kerbyggð 1","addressLocality":"Grímsnes- og Grafningshreppur","postalCode":"801","addressCountry":"IS"}}</script>
 <link rel="stylesheet" href="styles.css">
 <script>
@@ -85,7 +85,7 @@ try{ if(sessionStorage.getItem('kerb-preloaded')) document.documentElement.class
   <div class="sticky sticky--full-height sticky--under-next" data-parallax-pattern="sectionOutTiny">
     <div class="sticky__layer sticky__layer--sticky intro">
       <div class="intro__media" data-reveal="zoom-in block">
-        <img class="intro__img" src="assets/img/suite-kitchen@1440.webp" srcset="assets/img/suite-kitchen@720.webp 720w, assets/img/suite-kitchen@1440.webp 1440w, assets/img/suite-kitchen@1920.webp 1920w" sizes="100vw" alt="The suite house from the air, deck and hot tub on the open heath" fetchpriority="high">
+        <img class="intro__img" src="assets/img/suite-aerial@1440.webp" srcset="assets/img/suite-aerial@720.webp 720w, assets/img/suite-aerial@1440.webp 1440w, assets/img/suite-aerial@1920.webp 1920w, assets/img/suite-aerial@2400.webp 2400w" sizes="100vw" alt="A white bedroom off the hallway" fetchpriority="high">
       </div>
       <h1 class="intro__title" data-reveal-group data-reveal-delay="400">
         <span class="text-subtitle intro__script" data-reveal="subtitle">The newest, and the</span>
@@ -120,7 +120,7 @@ try{ if(sessionStorage.getItem('kerb-preloaded')) document.documentElement.class
 <!-- statement over the pinned still -->
 <section class="section ui-dark ui-background-alt l-room-still" data-themed="ui-dark" data-reveal-root>
   <div class="l-room-still__bg appear" data-parallax-pattern="backgroundMove" data-parallax-measure=".section">
-    <img data-img="house-aerial" data-w="720 1440 1920 2400" sizes="100vw" alt="The suite house from the air, deck and hot tub on the open heath" width="1440" height="979">
+    <img data-img="white-bed-hall" data-w="720 1440 1920" sizes="100vw" alt="A white bedroom off the hallway" width="1440" height="979">
   </div>
   <div class="l-room-still__copy" data-reveal-group data-reveal-delay="300">
     <p class="h1 text-center" data-reveal="title">THE NEWEST HOUSE, THE LARGEST TERRACE, AND THE SAME NINETY-THREE SQUARE METRES</p>
@@ -130,9 +130,9 @@ try{ if(sessionStorage.getItem('kerb-preloaded')) document.documentElement.class
 <!-- gallery -->
 <section class="section ui-light l-room-gallery" data-themed="ui-light" data-reveal-root>
   <div class="l-room-gallery__row">
-    <figure class="l-room-gallery__item l-room-gallery__item--1 parallax-image-move appear" data-parallax-pattern="imageMove"><img data-img="suite-bath-bed" data-w="720 1440 1920" sizes="30vw" alt="The bathroom and the bedroom" width="1440" height="979"><figcaption class="text-small">The bathroom and the bedroom</figcaption></figure>
-    <figure class="l-room-gallery__item l-room-gallery__item--2 parallax-image-move appear" data-parallax-pattern="imageMove"><img data-img="int-kitchen-view" data-w="720 1024" sizes="30vw" alt="The kitchen island and the terrace door" width="1024" height="696"><figcaption class="text-small">The kitchen island and the terrace door</figcaption></figure>
-    <figure class="l-room-gallery__item l-room-gallery__item--3 parallax-image-move appear" data-parallax-pattern="imageMove"><img data-img="int-bed-chair" data-w="720 1024" sizes="30vw" alt="A bedroom with a reading chair" width="1024" height="696"><figcaption class="text-small">A bedroom with a reading chair</figcaption></figure>
+    <figure class="l-room-gallery__item l-room-gallery__item--1 parallax-image-move appear" data-parallax-pattern="imageMove"><img data-img="suite-kitchen" data-w="720 1440 1920" sizes="30vw" alt="The kitchen island and dining table" width="1440" height="979"><figcaption class="text-small">The kitchen island and dining table</figcaption></figure>
+    <figure class="l-room-gallery__item l-room-gallery__item--2 parallax-image-move appear" data-parallax-pattern="imageMove"><img data-img="suite-living" data-w="720 1200 1600" sizes="30vw" alt="The living room of the suite house" width="1200" height="816"><figcaption class="text-small">The living room of the suite house</figcaption></figure>
+    <figure class="l-room-gallery__item l-room-gallery__item--3 parallax-image-move appear" data-parallax-pattern="imageMove"><img data-img="suite-bath" data-w="720 1440 1920" sizes="30vw" alt="The bathroom in the suite house" width="1440" height="979"><figcaption class="text-small">The bathroom in the suite house</figcaption></figure>
   </div>
   <p class="l-room-gallery__note text-small" data-reveal="text">Two single beds instead of the king can be arranged by email before you arrive.</p>
 </section>
@@ -150,17 +150,17 @@ try{ if(sessionStorage.getItem('kerb-preloaded')) document.documentElement.class
   <h2 class="h2 l-room-others__title" data-reveal="title">THE OTHER HOUSES</h2>
   <ul class="l-room-others__list">
     <li><a class="l-room-others__card" href="house-three.html">
-      <span class="l-room-others__media appear"><img data-img="three-open-plan" data-w="720 1024" sizes="30vw" alt="" width="1024" height="696"></span>
+      <span class="l-room-others__media appear"><img data-img="three-open-plan" data-w="720 1440 1920 2560" sizes="30vw" alt="" width="1440" height="979"></span>
       <span class="l-room-others__name h3">THREE BEDROOM</span>
       <span class="text-small">93 m² · sleeps 6<span class="l-room-others__price">From ISK 69,700 a night</span></span>
     </a></li>
     <li><a class="l-room-others__card" href="house-three-tub.html">
-      <span class="l-room-others__media appear"><img data-img="three-bed-king" data-w="720 1024" sizes="30vw" alt="" width="1024" height="696"></span>
+      <span class="l-room-others__media appear"><img data-img="three-exterior" data-w="720 1440 1920" sizes="30vw" alt="" width="1440" height="979"></span>
       <span class="l-room-others__name h3">THREE WITH TUB</span>
       <span class="text-small">93 m² · sleeps 6 · hot tub<span class="l-room-others__price">From ISK 76,700 a night</span></span>
     </a></li>
     <li><a class="l-room-others__card" href="house-superior.html">
-      <span class="l-room-others__media appear"><img data-img="superior-kitchen" data-w="720 1024" sizes="30vw" alt="" width="1024" height="696"></span>
+      <span class="l-room-others__media appear"><img data-img="superior-tub" data-w="720 1440 1920" sizes="30vw" alt="" width="1440" height="979"></span>
       <span class="l-room-others__name h3">SUPERIOR TWO</span>
       <span class="text-small">93 m² · sleeps 5 · two ensuites<span class="l-room-others__price">From ISK 83,800 a night</span></span>
     </a></li>

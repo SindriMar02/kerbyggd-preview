@@ -90,12 +90,17 @@ const docLeft = el => { let x = 0; while (el) { x += el.offsetLeft; el = el.offs
    ============================================================ */
 const scroller = (() => {
   const s = { y: scrollY, target: scrollY, limit: 0, moving: false, wells: [], snaps: [], listeners: [] };
-  const LERP = .1, BAND = () => VH * .25;
+  /* Tuned lighter than the reference after the chapters read as heavy going.
+     LERP is how fast the page catches the target, the well factor is the floor
+     it may be slowed to inside a pinned chapter, and the wheel is damped twice:
+     once for Mac trackpads and again inside a well. All four were fighting the
+     reader at once. */
+  const LERP = .14, BAND = () => VH * .25;
   let snapTimer = 0, tween = null, lastWheel = 0, expected = -1;
   const setLimit = () => { s.limit = Math.max(0, document.scrollingElement.scrollHeight - innerHeight); };
   const wellFactor = y => {
     let f = 1;
-    for (const w of s.wells) { const d = Math.abs(y - w); if (d < BAND()) f = Math.min(f, clamp((d / BAND() + .35) / 1.35)); }
+    for (const w of s.wells) { const d = Math.abs(y - w); if (d < BAND()) f = Math.min(f, clamp((d / BAND() + .55) / 1.55)); }
     return f;
   };
   const inBand = y => s.wells.some(w => Math.abs(y - w) < BAND());
@@ -103,8 +108,8 @@ const scroller = (() => {
     if (!SMOOTH || html.classList.contains('with-modal')) return;
     e.preventDefault();
     let d = e.deltaY * (e.deltaMode === 1 ? 40 : e.deltaMode === 2 ? VH : 1);
-    if (isMac) d *= .4;
-    if (inBand(s.target)) d *= .25;
+    if (isMac) d *= .55;
+    if (inBand(s.target)) d *= .45;
     s.target = clamp(s.target + d, 0, s.limit);
     tween = null; lastWheel = performance.now();
     clearTimeout(snapTimer); snapTimer = setTimeout(trySnap, 250);
@@ -754,6 +759,25 @@ const rooms = (() => {
   const names = $$('.l-three-worlds__name'), ringBar = $('.progress-ring__bar', $('#worlds-ring')), counter = $('#worlds-counter');
   const cursor = $('#room-cursor');
   const ROOMS = names.map(n => ({ label: n.textContent.trim(), href: n.dataset.href, img: n.dataset.img, w: +n.dataset.w || 1200, price: n.dataset.price }));
+  const splitChars = (el, text) => {
+    el.textContent = '';
+    [...text].forEach((ch, i) => {
+      const c = document.createElement('span');
+      c.className = 'char';
+      c.style.setProperty('--char-index', i);
+      // a plain space collapses inside an inline-block char
+      c.textContent = ch === ' ' ? '\u00A0' : ch;
+      el.appendChild(c);
+    });
+  };
+  const priceBox = $('#worlds-price');
+  const priceLines = ROOMS.map((r, k) => {
+    const el = k === 0 ? $('.l-three-worlds__price-line', priceBox) : document.createElement('span');
+    el.className = 'l-three-worlds__price-line' + (k === 0 ? ' is-active' : '');
+    splitChars(el, r.price ? `From ISK ${r.price} a night` : '');
+    if (k) priceBox.appendChild(el);
+    return el;
+  });
   names.forEach(n => { const t = n.textContent; n.textContent = ''; [...t].forEach((ch, i) => { const c = document.createElement('span'); c.className = 'char'; c.style.setProperty('--char-index', i); c.textContent = ch === ' ' ? '\u00A0' : ch; n.appendChild(c); }); });
   const SPREAD = 34 * Math.PI / 180;
   let renderer, scene, camera, ready = false, planes = [], inited = false, W = 0, H = 0, lastIndex = -1, dirty = true;
@@ -806,7 +830,10 @@ const rooms = (() => {
     counter.textContent = i + 1;
     ringBar.style.strokeDashoffset = 373.25 * (1 - (i + 1) / ROOMS.length);
     const link = $('#worlds-link'); if (link && ROOMS[i]) { link.href = ROOMS[i].href; }
-    const pr = $('#worlds-price b'); if (pr && ROOMS[i] && ROOMS[i].price) pr.textContent = ROOMS[i].price;
+    // the rate changes with the same masked, staggered, direction-aware slide the
+    // house name uses, so the two read as one line change rather than a label
+    // being retyped next to an animation
+    priceLines.forEach((el, k) => { el.classList.toggle('is-active', k === i); el.classList.toggle('is-leaving-up', up && k < i); });
     lastIndex = i;
   };
   const tick = y => {

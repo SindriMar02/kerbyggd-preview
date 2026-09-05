@@ -1158,7 +1158,21 @@ p, .text-small, .l-room-facts dd, figcaption{text-wrap:pretty}
    find out, which is exactly the trip to the OTA this build exists to stop.
    The figure sits with the name in the selector, with the spec on touch, and as
    a full fact row on the house pages. */
-.l-three-worlds__price{position:absolute;top:100%;left:0;margin-top:12px;color:var(--t-primary);letter-spacing:.06em}
+.l-three-worlds__price{position:absolute;top:100%;left:0;margin-top:12px;height:1.36em;color:var(--t-primary);letter-spacing:.06em}
+/* Same vocabulary as the house name above it: a mask, characters that slide
+   vertically on the house curve, staggered, and direction-aware so the rate
+   leaves the way the name leaves. The stagger is tighter than the name's 12ms
+   because this line has three times the characters at a fifth the size, and at
+   12ms the tail of the number was still arriving after the name had settled. */
+.l-three-worlds__price-line{position:absolute;left:0;top:0;white-space:nowrap;overflow:hidden;line-height:1.36}
+.l-three-worlds__price-line .char{transition:transform .6s var(--ease-house);transition-delay:calc(var(--char-index) * 5ms)}
+.l-three-worlds__price-line:not(.is-active) .char{transform:translateY(130%)}
+.l-three-worlds__price-line.is-leaving-up .char{transform:translateY(-130%)}
+@media (prefers-reduced-motion:reduce){
+  .l-three-worlds__price-line .char{transition:none}
+  .l-three-worlds__price-line:not(.is-active){opacity:0}
+  .l-three-worlds__price-line:not(.is-active) .char{transform:none}
+}
 .l-three-worlds__price b{font-weight:600;color:var(--t-text)}
 .l-rooms-mobile__price{display:block;margin-top:4px;color:var(--t-primary);letter-spacing:.06em}
 .l-room-others__price{display:block;margin-top:4px;color:var(--t-primary);letter-spacing:.06em}
@@ -1168,3 +1182,60 @@ p, .text-small, .l-room-facts dd, figcaption{text-wrap:pretty}
    adds no height and the bottom row sat 3px off the viewport edge. Reserve the
    line's height instead of nudging the whole block by a magic number. */
 @media (min-width:768px){ .l-three-worlds__bottom{bottom:calc(var(--spacing) + 30px)} }
+
+/* ---- map chapter: length, and the title that ran under the card ----
+   650svh of scroll for four stops was more than the content earns; 72svh a stop
+   with a shorter run-out keeps the flight and loses the wait. The title was
+   centred across the full width with the card pinned right, so the h0 ran
+   underneath it and the last word was never visible: give the title the left of
+   the screen and let the card have the right. */
+@media (min-width:768px){
+  .l-location__card-sticky{height:calc(72svh * var(--location-count,4) + 40svh)}
+  .l-location__map-layer{height:calc(72svh * var(--location-count,4) + 40svh + 80svh)}
+  .l-location__title{right:auto;width:min(58vw,760px);align-items:flex-start;text-align:left;
+    padding-left:var(--spacing);padding-right:0}
+  .l-location__title .h0{font-size:6.4rem;line-height:1.02}
+  .l-location__title .text-subtitle{font-size:5.6rem}
+}
+@media (min-width:1600px){ .l-location__title .h0{font-size:8rem} }
+
+/* ---- the herbarium's closing pages ----
+   A full viewport of nothing between the two paragraphs, and the first of them
+   set three columns wide, which turned an ordinary sentence into a tall ribbon
+   of uppercase serif two or three words to the line. Give the copy a readable
+   measure and cut the gap to something that still separates them. */
+.l-selection__spacer{height:34svh}
+@media (min-width:768px){
+  .l-selection__flow .row:first-child .h3{
+    flex:0 0 41.6667vw;max-width:41.6667vw;margin-left:16.6667vw}
+  .l-selection__statement{flex:0 0 50vw;max-width:50vw;margin-left:41.6667vw}
+}
+@media (max-width:767px){ .l-selection__spacer{height:16svh} }
+
+/* ---- reviews ----
+   The carousel above is the moment; this is the part a search engine and a
+   sceptical reader both need: every review in full, on the page, at rest. */
+.l-reviews{padding:calc(var(--spacing)*6) var(--spacing) calc(var(--spacing)*7)}
+.l-reviews__head{display:flex;flex-direction:column;align-items:center;gap:calc(var(--spacing)*.6);
+  margin-bottom:calc(var(--spacing)*4)}
+.l-reviews__score{font-family:var(--font-serif);font-weight:300;line-height:.9;color:var(--t-heading);
+  font-size:11rem;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.l-reviews__meta{text-align:center;color:var(--t-text)}
+.l-reviews__meta span{display:block;color:var(--t-small);margin-top:4px}
+.l-reviews__list{display:grid;gap:calc(var(--spacing)*2.5);max-width:1180px;margin:0 auto;
+  grid-template-columns:1fr}
+@media (min-width:768px){ .l-reviews__list{grid-template-columns:repeat(2,1fr);
+  gap:calc(var(--spacing)*3) calc(var(--spacing)*4)} }
+@media (min-width:1400px){ .l-reviews__list{grid-template-columns:repeat(3,1fr)} }
+/* the first review is the longest and carries the section, so it spans */
+@media (min-width:1400px){ .l-reviews__item:first-child{grid-column:span 2} }
+.l-reviews__item{display:flex;flex-direction:column;gap:calc(var(--spacing)*.9);
+  border-top:1px solid var(--t-line);padding-top:calc(var(--spacing)*1.1)}
+.l-reviews__quote{margin:0}
+.l-reviews__quote p{margin:0;font-size:1.6rem;line-height:1.5;color:var(--t-text);max-width:52ch;
+  text-wrap:pretty}
+.l-reviews__by{color:var(--t-heading)}
+.l-reviews__by span{display:block;color:var(--t-small);margin-top:2px}
+.l-reviews__foot{text-align:center;color:var(--t-small);margin-top:calc(var(--spacing)*3.5)}
+@media (min-width:1920px){ .l-reviews__quote p{font-size:1.8rem} }
+@media (max-width:767px){ .l-reviews__score{font-size:7.2rem} .l-reviews__quote p{font-size:1.5rem} }
