@@ -1224,6 +1224,14 @@ p, .text-small, .l-room-facts dd, figcaption{text-wrap:pretty}
    The carousel above is the moment; this is the part a search engine and a
    sceptical reader both need: every review in full, on the page, at rest. */
 .l-reviews{padding:calc(var(--spacing)*6) var(--spacing) calc(var(--spacing)*7)}
+/* The register chapter that follows is a --under-previous --under-next sticky:
+   it is pulled up 200svh and clips its own top 100svh, so the LAST 100svh of
+   whatever precedes it is the ground its photograph rises through. Every other
+   chapter here donates that space. Reviews was added later and did not, so the
+   photo cut the review list in half from the moment it entered the viewport.
+   The space is not empty: it is the reveal. Desktop only, since the overlap is
+   flattened under 768px and the same padding would be a dead gap on a phone. */
+@media (min-width:768px){ .l-reviews{padding-bottom:calc(100svh + var(--spacing)*3)} }
 .l-reviews__head{display:flex;flex-direction:column;align-items:center;gap:calc(var(--spacing)*.6);
   margin-bottom:calc(var(--spacing)*4)}
 .l-reviews__score{font-family:var(--font-serif);font-weight:300;line-height:.9;color:var(--t-heading);
@@ -1236,7 +1244,13 @@ p, .text-small, .l-room-facts dd, figcaption{text-wrap:pretty}
   gap:calc(var(--spacing)*3) calc(var(--spacing)*4)} }
 @media (min-width:1400px){ .l-reviews__list{grid-template-columns:repeat(3,1fr)} }
 /* the first review is the longest and carries the section, so it spans */
-@media (min-width:1400px){ .l-reviews__item:first-child{grid-column:span 2} }
+/* The first review spans two columns, so it has to be SET as a pull quote:
+   at one column's type and 52ch it filled half its own cell and read as a hole
+   in the grid. Larger, wider, and its rule runs the full span. */
+@media (min-width:1400px){
+  .l-reviews__item:first-child{grid-column:span 2}
+  .l-reviews__item:first-child .l-reviews__quote p{font-size:2.4rem;line-height:1.4;max-width:38ch}
+}
 .l-reviews__item{display:flex;flex-direction:column;gap:calc(var(--spacing)*.9);
   border-top:1px solid var(--t-line);padding-top:calc(var(--spacing)*1.1)}
 .l-reviews__quote{margin:0}
