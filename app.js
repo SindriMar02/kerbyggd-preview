@@ -993,7 +993,7 @@ const map = (() => {
      that fits it into the free part of the screen, and translates so its centre
      lands there. The intro keeps the flight: tight on the house, then out. */
   const mapEl = $('.js-location-map');
-  if (!mapEl) return;                                        // house pages carry no map; nothing below has anything to frame
+  if (!mapEl) return { tick() {}, setIndex() {} };            // house pages carry no map; nothing below has anything to frame
   const card = $('.l-location-card');
   let last = -1;
   let cur = { x: 0, y: 0, s: 1.9 }, want = { x: 0, y: 0, s: 1.9 };
