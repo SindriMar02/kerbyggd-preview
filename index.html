@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kerbyggð — luxury houses in the Golden Circle</title>
+<meta name="description" content="Four houses of ninety-three square metres on the Golden Circle, drawn by the architect who built them with her family. Five minutes from the Kerið crater.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#18201F">
+<link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
+<link rel="preload" href="assets/fonts/Zodiak-Light.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/PinyonScript-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/HostGrotesk-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/HostGrotesk-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/img/paint-heath@1440.webp" as="image" type="image/webp" media="(min-width: 768px)">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LodgingBusiness","name":"Kerbyggð","description":"Four architect-designed houses of 93 m² in the Golden Circle, south Iceland, five minutes from the Kerið crater.","url":"https://kerbyggd.is/","telephone":"+354 782 5400","email":"kerhotel@kerhotel.is","address":{"@type":"PostalAddress","streetAddress":"Kerbyggð 1","addressLocality":"Grímsnes- og Grafningshreppur","postalCode":"801","addressCountry":"IS"},"geo":{"@type":"GeoCoordinates","latitude":64.029,"longitude":-20.88},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Private hot tub","value":true},{"@type":"LocationFeatureSpecification","name":"Free WiFi","value":true},{"@type":"LocationFeatureSpecification","name":"Underfloor heating","value":true}]}</script>
+<link rel="stylesheet" href="styles.css">
+<script>
+document.documentElement.classList.replace('no-js','js');
+/* Coming back from a house page? The preloader only runs once per session, so
+   raise the curtain here and let app.js drop it after the first paint. */
+try{ if(sessionStorage.getItem('kerb-preloaded')) document.documentElement.classList.add('is-entering'); }catch(e){}
+</script>
+<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>
+</head>
+<body class="ui-dark">
+<a class="skip" href="#about">Skip to content</a>
+<!--SPRITE:start--><svg class="brand-sprite" aria-hidden="true" width="0" height="0" focusable="false">
+<symbol id="wm-word" viewBox="0 0 985.14 100.00"><path d="M92.42857142857142 88.57142857142857 56.42857142857142 25.0 75.28571428571428 10.857142857142861C85.57142857142857 4.285714285714292 95.28571428571428 2.4285714285714306 105.71428571428571 1.4285714285714306V0.0H69.42857142857143V1.4285714285714306C79.14285714285714 2.4285714285714306 80.42857142857143 3.857142857142861 71.0 10.57142857142857L31.285714285714285 39.714285714285715V11.857142857142861C31.285714285714285 3.7142857142857224 37.57142857142857 2.5714285714285836 47.71428571428571 1.5714285714285836V0.142857142857153H5.857142857142857V1.5714285714285836C16.857142857142858 2.5714285714285836 22.285714285714285 3.7142857142857224 22.285714285714285 11.857142857142861V88.28571428571429C22.285714285714285 96.42857142857143 16.71428571428571 97.71428571428571 5.857142857142857 98.71428571428571V100.14285714285714H47.71428571428571V98.71428571428571C37.57142857142857 97.71428571428571 31.285714285714285 96.42857142857143 31.285714285714285 88.28571428571429V43.42857142857143L48.857142857142854 30.714285714285722L81.85714285714285 88.85714285714286C86.42857142857143 96.28571428571429 82.14285714285714 97.57142857142857 72.28571428571428 98.57142857142857V100.0H114.85714285714285V98.57142857142857C104.85714285714285 97.71428571428571 97.28571428571428 96.42857142857143 92.42857142857142 88.57142857142857Z M195.42857142857142 2.5714285714285836C211.0 2.5714285714285836 215.42857142857142 12.857142857142861 216.42857142857142 32.0H217.85714285714283V0.0H137.85714285714286V1.4285714285714306C148.0 2.4285714285714306 154.57142857142856 3.7142857142857224 154.57142857142856 11.714285714285722V88.28571428571429C154.57142857142856 96.28571428571429 148.0 97.57142857142857 137.85714285714286 98.57142857142857V100.0H217.85714285714283V68.0H216.42857142857142C215.57142857142856 86.14285714285714 211.42857142857142 97.42857142857143 197.85714285714283 97.42857142857143H163.42857142857142V31.142857142857153H172.42857142857142C188.42857142857142 31.142857142857153 194.42857142857142 36.57142857142858 202.57142857142856 56.42857142857143L204.0 56.0L188.85714285714283 11.42857142857143L187.42857142857142 11.857142857142861C191.0 26.57142857142857 188.57142857142856 28.57142857142857 172.42857142857142 28.57142857142857H163.42857142857142V2.5714285714285836H195.42857142857142Z M330.0 88.0C322.0 66.57142857142858 336.0 36.28571428571429 311.4285714285714 32.28571428571429C324.4285714285714 30.42857142857143 330.1428571428571 23.57142857142857 330.1428571428571 16.714285714285722C330.1428571428571 8.0 321.85714285714283 0.0 304.7142857142857 0.0H249.28571428571428V1.4285714285714306C260.1428571428571 2.4285714285714306 266.0 3.7142857142857224 266.0 11.714285714285722V88.28571428571429C266.0 96.28571428571429 260.1428571428571 97.57142857142857 249.28571428571428 98.57142857142857V100.0H291.57142857142856V98.57142857142857C281.4285714285714 97.57142857142857 274.85714285714283 96.42857142857143 274.85714285714283 88.28571428571429V33.14285714285715H300.57142857142856C327.7142857142857 33.14285714285715 313.0 69.42857142857143 321.4285714285714 89.85714285714286C325.4285714285714 99.57142857142857 331.7142857142857 100.28571428571429 340.85714285714283 100.42857142857143H343.57142857142856V99.0C336.2857142857143 99.0 333.0 96.0 330.0 88.0ZM301.0 30.57142857142857H274.85714285714283V2.5714285714285836H300.2857142857143C314.85714285714283 2.5714285714285836 320.57142857142856 10.0 320.57142857142856 16.85714285714286C320.57142857142856 23.57142857142857 314.85714285714283 30.57142857142857 301.0 30.57142857142857Z M425.1428571428571 32.42857142857143C437.0 31.285714285714292 446.71428571428567 24.85714285714286 446.71428571428567 16.714285714285722C446.71428571428567 7.428571428571431 437.71428571428567 0.0 420.0 0.0H366.57142857142856V1.4285714285714306C377.57142857142856 2.4285714285714306 383.2857142857143 3.7142857142857224 383.2857142857143 11.714285714285722V88.28571428571429C383.2857142857143 96.28571428571429 377.4285714285714 97.57142857142857 366.57142857142856 98.57142857142857V100.0H416.2857142857143C442.85714285714283 100.0 451.85714285714283 83.28571428571429 451.85714285714283 65.0C451.85714285714283 50.28571428571429 441.71428571428567 35.14285714285715 425.1428571428571 32.42857142857143ZM414.85714285714283 2.5714285714285836C431.57142857142856 2.5714285714285836 437.2857142857143 9.857142857142861 437.2857142857143 17.0C437.2857142857143 24.0 431.57142857142856 30.714285714285722 415.57142857142856 30.714285714285722H392.1428571428571V2.5714285714285836H414.85714285714283ZM412.4285714285714 97.42857142857143H392.1428571428571V33.28571428571429H412.4285714285714C433.57142857142856 33.28571428571429 442.1428571428571 49.42857142857143 442.1428571428571 65.85714285714286C442.1428571428571 82.57142857142857 436.0 97.42857142857143 412.4285714285714 97.42857142857143Z M510.71428571428567 98.57142857142857V100.0H553.0V98.57142857142857C542.2857142857142 97.57142857142857 536.4285714285714 96.42857142857143 536.2857142857142 88.28571428571429V55.0L560.0 11.142857142857153C564.5714285714286 3.7142857142857224 572.4285714285714 2.4285714285714306 581.8571428571428 1.4285714285714306V0.0H546.8571428571428V1.4285714285714306C556.4285714285714 2.285714285714292 561.2857142857142 4.0 557.1428571428571 10.42857142857143L535.4285714285714 50.85714285714286L512.1428571428571 10.857142857142861C507.2857142857143 4.0 511.85714285714283 2.4285714285714306 521.7142857142857 1.4285714285714306V0.0H479.2857142857143V1.4285714285714306C488.4285714285714 2.285714285714292 496.1428571428571 3.5714285714285836 501.4285714285714 10.42857142857143L527.4285714285714 55.42857142857143V88.28571428571429C527.4285714285714 96.42857142857143 520.8571428571428 97.57142857142857 510.71428571428567 98.57142857142857Z M673.8571428571428 37.142857142857146V38.57142857142858C684.1428571428571 39.57142857142858 690.5714285714286 40.85714285714286 690.5714285714286 48.85714285714286V87.71428571428572C684.5714285714286 94.14285714285714 674.4285714285714 99.57142857142857 659.5714285714286 99.57142857142857C632.8571428571428 99.57142857142857 619.0 76.42857142857143 619.0 50.85714285714286C619.0 24.0 633.7142857142857 0.4285714285714306 660.0 0.4285714285714306C676.0 0.4285714285714306 690.7142857142857 10.857142857142861 696.4285714285714 32.42857142857143H697.8571428571428L694.7142857142857 9.0C687.1428571428571 2.7142857142857224 675.5714285714286 -2.142857142857139 659.8571428571428 -2.142857142857139C631.8571428571428 -2.142857142857139 609.2857142857142 18.142857142857153 609.2857142857142 50.714285714285715C609.2857142857142 80.0 631.0 102.14285714285714 658.8571428571428 102.14285714285714C674.1428571428571 102.14285714285714 684.5714285714286 97.14285714285714 690.5714285714286 91.57142857142857L699.4285714285714 102.14285714285714V48.85714285714286C699.4285714285714 40.85714285714286 705.1428571428571 39.57142857142858 716.1428571428571 38.57142857142858V37.142857142857146H673.8571428571428Z M809.1428571428571 37.142857142857146V38.57142857142858C819.4285714285713 39.57142857142858 825.8571428571428 40.85714285714286 825.8571428571428 48.85714285714286V87.71428571428572C819.8571428571428 94.14285714285714 809.7142857142857 99.57142857142857 794.8571428571428 99.57142857142857C768.1428571428571 99.57142857142857 754.2857142857142 76.42857142857143 754.2857142857142 50.85714285714286C754.2857142857142 24.0 769.0 0.4285714285714306 795.2857142857142 0.4285714285714306C811.2857142857142 0.4285714285714306 826.0 10.857142857142861 831.7142857142857 32.42857142857143H833.1428571428571L830.0 9.0C822.4285714285713 2.7142857142857224 810.8571428571428 -2.142857142857139 795.1428571428571 -2.142857142857139C767.1428571428571 -2.142857142857139 744.5714285714286 18.142857142857153 744.5714285714286 50.714285714285715C744.5714285714286 80.0 766.2857142857142 102.14285714285714 794.1428571428571 102.14285714285714C809.4285714285713 102.14285714285714 819.8571428571428 97.14285714285714 825.8571428571428 91.57142857142857L834.7142857142857 102.14285714285714V48.85714285714286C834.7142857142857 40.85714285714286 840.4285714285713 39.57142857142858 851.4285714285713 38.57142857142858V37.142857142857146H809.1428571428571Z M873.8571428571428 48.57142857142858V51.42857142857143H891.1428571428571V88.71428571428572C891.1428571428571 96.28571428571429 886.1428571428571 97.57142857142857 875.4285714285713 98.57142857142857V100.0H924.8571428571428C959.4285714285713 100.0 975.0 77.0 975.0 50.28571428571429C975.0 22.714285714285722 959.4285714285713 0.0 924.0 0.0H875.4285714285713V1.4285714285714306C886.1428571428571 2.4285714285714306 891.1428571428571 3.5714285714285836 891.1428571428571 11.285714285714292V48.57142857142858H873.8571428571428ZM919.5714285714286 97.42857142857143H900.0V51.42857142857143H925.1428571428571V48.57142857142858H900.0V2.5714285714285836H919.1428571428571C952.5714285714286 2.5714285714285836 965.4285714285713 24.142857142857153 965.4285714285713 50.57142857142858C965.4285714285713 76.42857142857143 953.1428571428571 97.42857142857143 919.5714285714286 97.42857142857143Z" fill="currentColor"/></symbol>
+<symbol id="wm-ridge" viewBox="0 0 300 62"><path d="M 10 53 L 36 45 L 53 44 L 70 35 L 96 16 L 105 6 L 112 10 L 129 2 L 147 5 L 159 17 L 192 14 L 213 15 L 231 21 L 241 27 L 266 37 L 292 48 M 159 17 L 140 29 L 117 45 M 231 21 L 209 33 L 189 46" stroke="currentColor" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+<symbol id="wm-ridge-s" viewBox="0 0 300 62"><path d="M 10 53 L 36 45 L 53 44 L 70 35 L 96 16 L 105 6 L 112 10 L 129 2 L 147 5 L 159 17 L 192 14 L 213 15 L 231 21 L 241 27 L 266 37 L 292 48" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+</svg><!--SPRITE:end-->
+
+<!-- ───────── preloader ───────── -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader__inner">
+    <svg class="preloader__mark" viewBox="0 0 300 62" aria-hidden="true"><use href="#wm-ridge-s"/></svg>
+    <div class="preloader__bar"><span id="preloader-fill"></span></div>
+    <div class="preloader__counter"><b id="preloader-counter">0</b><i>%</i></div>
+  </div>
+</div>
+
+<div class="page-overlay" id="page-overlay"></div>
+
+<!-- ───────── header ───────── -->
+<header class="header ui-dark ui-gradient header--top" id="header">
+  <div class="header__row">
+    <div class="header__left">
+      <button class="btn btn--link header__menu js-menu-toggle" type="button" aria-expanded="false" aria-controls="menu">
+        <span class="header__burger" aria-hidden="true"><i></i><i></i></span>
+        <span class="header__menu-words"><span class="header__menu-word header__menu-word--open">Menu</span><span class="header__menu-word header__menu-word--close">Close</span></span>
+      </button>
+    </div>
+    <a class="header__logo" href="#top" aria-label="Kerbyggð, back to top">
+      <span class="header__logo-text">
+        <svg class="header__logo-word" viewBox="0 0 985.14 100" aria-hidden="true"><use href="#wm-word"/></svg>
+        <span class="header__logo-sub">Golden Circle</span>
+      </span>
+      <svg class="header__logo-mark" viewBox="0 0 300 62" aria-hidden="true"><use href="#wm-ridge-s"/></svg>
+    </a>
+    <div class="header__right">
+      <a class="btn btn--underline header__map" href="#locations"><span class="btn__underline">Map</span></a>
+      <a class="btn btn--underline header__book" data-booking href="https://property.godo.is/book-kerbyggd" target="_blank" rel="noopener"><span class="btn__underline">Book direct</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ───────── menu modal ───────── -->
+<div class="modal modal--menu is-hidden" id="menu" aria-hidden="true">
+  <div class="modal__bg">
+    <img class="modal__img" src="assets/img/paint-house-dusk@1440.webp" alt="" loading="lazy" width="1440" height="804">
+  </div>
+  <div class="modal__scroller js-menu-scroller">
+    <ol class="menu__list js-menu-list">
+      <li><a class="menu__link js-menu-link" href="#about"><span class="menu__label text-small">Chapter 1</span><span class="menu__title h1">The houses</span></a></li>
+      <li><a class="menu__link js-menu-link" href="#collection"><span class="menu__label text-small">Chapter 2</span><span class="menu__title h1">Four types</span></a></li>
+      <li><a class="menu__link js-menu-link" href="#expansive"><span class="menu__label text-small">Chapter 3</span><span class="menu__title h1">The family</span></a></li>
+      <li><a class="menu__link js-menu-link" href="#selection"><span class="menu__label text-small">Chapter 4</span><span class="menu__title h1">The herbarium</span></a></li>
+      <li><a class="menu__link js-menu-link" href="#locations"><span class="menu__label text-small">Chapter 5</span><span class="menu__title h1">Golden Circle</span></a></li>
+      <li><a class="menu__link js-menu-link" href="#the-idea"><span class="menu__label text-small">Chapter 6</span><span class="menu__title h1">Inga and Ísak</span></a></li>
+      <li><a class="menu__link js-menu-link" href="#contact"><span class="menu__label text-small">Chapter 7</span><span class="menu__title h1">Book direct</span></a></li>
+    </ol>
+  </div>
+</div>
+
+<div class="scroll-cue" id="scroll-cue" aria-hidden="true">
+  <span class="scroll-cue__label">Scroll</span>
+  <span class="scroll-cue__line"><i></i></span>
+</div>
+
+<div class="c-scrollbar" id="scrollbar" aria-hidden="true"><span class="c-scrollbar__thumb"></span></div>
+
+<main class="page-content" id="page">
+
+<!-- 0 ── HERO ─────────────────────────────────────────── -->
+<section class="section section--top section--full-height ui-dark ui-background-alt" id="top" data-themed="ui-dark ui-gradient ui-intro" data-reveal-root>
+  <div class="sticky sticky--full-height sticky--under-next" data-parallax-pattern="sectionOutTiny">
+    <div class="sticky__layer sticky__layer--sticky intro">
+      <div class="intro__media" data-reveal="zoom-in block">
+        <img class="intro__img" src="assets/img/paint-heath@1440.webp" srcset="assets/img/paint-heath@720.webp 720w, assets/img/paint-heath@1440.webp 1440w, assets/img/paint-heath@1920.webp 1920w, assets/img/paint-heath@2560.webp 2560w" sizes="100vw" alt="Watercolour of the south Icelandic heath under storm cloud" fetchpriority="high">
+      </div>
+      <h1 class="intro__title" data-reveal-group data-reveal-delay="500">
+        <span class="intro__lockup" data-reveal="zoom-in">
+          <svg class="intro__ridge" viewBox="0 0 300 62" aria-hidden="true"><use href="#wm-ridge"/></svg>
+          <svg class="intro__word" viewBox="0 0 985.14 100" role="img" aria-label="Kerbyggð"><use href="#wm-word"/></svg>
+        </span>
+        <span class="intro__rule" aria-hidden="true" data-reveal="fade-in"></span>
+        <span class="text-small intro__tag" data-reveal="text">Luxury houses in the Golden Circle</span>
+      </h1>
+      <div class="intro__arrow" data-reveal="slide-in-bottom block" data-reveal-delay="1000">
+        <a class="btn btn--gradient btn--arrow-down" href="#about" aria-label="Scroll to the houses"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="g-ring-1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A443E"/><stop offset="1" stop-color="#7C8A80"/></linearGradient></defs><circle class="btn__ring" cx="20" cy="20" r="19.35" fill="none" stroke="url(#g-ring-1)" stroke-width="1.3"/></svg><span class="btn__arrow" aria-hidden="true"></span></a>
+      </div>
+      <a class="button-3d" href="#locations" data-reveal="fade-in block" data-reveal-delay="1000">
+        <span class="button-3d__media"><img src="assets/img/paint-kerid@720.webp" alt="" loading="lazy" width="720" height="402"></span>
+        <span class="button-3d__text">
+          <span class="button-3d__big">Map</span>
+          <span class="text-small">Five minutes to the crater</span>
+        </span>
+        <span class="btn btn--square btn--outline-plus" aria-hidden="true"><i></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 1 ── ABOUT / the houses ─────────────────────────────── -->
+<section class="section ui-light l-luxury" id="about" data-themed="ui-light" data-reveal-root>
+  <div class="l-luxury__head" data-reveal-group data-reveal-delay="250" data-parallax-pattern="landingLuxuryTitle" data-parallax-measure=".section">
+    <p class="text-small text-center l-luxury__label" data-reveal="text">Four houses,<br>drawn and built</p>
+    <h2 class="h2 text-center" data-reveal="title">BY THE SAME<br>FAMILY</h2>
+  </div>
+
+  <div class="sticky sticky--under-next l-luxury__stage">
+    <div class="sticky__layer sticky__layer--sticky l-luxury__pin">
+      <div class="l-luxury__row js-luxury-wrapper">
+        <figure class="l-luxury__side l-luxury__side--left appear" data-parallax-pattern="landingLuxuryMoveSideDesktop landingLuxuryScaleSideLeftDesktop" data-parallax-measure=".section">
+          <img data-img="int-bed-chair" data-w="720 1024" sizes="25vw" alt="A bedroom with a reading chair by the window">
+        </figure>
+        <figure class="l-luxury__center appear" data-parallax-pattern="landingLuxuryTitle landingLuxuryScaleCenterDesktop" data-parallax-measure=".section">
+          <img data-img="house-aerial" data-w="720 1440 1920" sizes="42vw" alt="A Kerbyggð house from the air, its deck and hot tub on the open heath">
+        </figure>
+        <figure class="l-luxury__side l-luxury__side--right appear" data-parallax-pattern="landingLuxuryMoveSideDesktop landingLuxuryScaleSideRightDesktop" data-parallax-measure=".section">
+          <img data-img="int-kitchen-view" data-w="720 1024" sizes="25vw" alt="The kitchen island and the door out to the terrace">
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- the plate that rides over the pinned trio: it carries the section's own
+       ground, or the serif statement lands unreadable on the photographs -->
+  <div class="l-luxury__flow">
+  <div class="l-luxury-title" data-reveal-group>
+    <p class="h1 l-luxury-title__text" data-reveal="title">NINETY-THREE SQUARE METRES, FOUR WAYS. AN ARCHITECT DREW THEM. HER HUSBAND AND THEIR SONS BUILT THEM</p>
+    <p class="text-subtitle l-luxury-title__bottom" data-reveal="subtitle">on the road to Kerið</p>
+  </div>
+
+  <div class="row l-luxury__pair">
+    <figure class="col col--md-6 col--md-offset-3 parallax-image-move appear" data-parallax-pattern="imageMove">
+      <img data-img="living-view" data-w="720 1024" sizes="50vw" alt="The living room, corner windows onto the heath">
+    </figure>
+    <figure class="col col--md-3 parallax-image-move appear l-luxury__pair-small" data-parallax-pattern="imageMove">
+      <img data-img="int-bath-tub" data-w="720 1024" sizes="25vw" alt="A bathroom with a free standing bath">
+    </figure>
+  </div>
+  </div>
+</section>
+
+<!-- 2 ── MERIT ─────────────────────────────────────────── -->
+<section class="section section--full-height ui-dark l-merit" id="merit" data-themed="ui-dark" data-reveal-root>
+  <div class="l-merit__bg appear" data-parallax-pattern="backgroundMove" data-parallax-measure=".section">
+    <img data-img="paint-ridge" data-w="720 1440 1920" sizes="100vw" alt="Watercolour of the mountain ridge across the plain">
+  </div>
+  <div class="l-merit__content" data-reveal-group data-reveal-delay="200" data-parallax-100-0='{"transform":"translateY(20svh)"}' data-parallax-0-100='{"transform":"translateY(-20svh)"}' data-parallax-clamp="true" data-parallax-measure=".section">
+    <h2 class="h2 text-center" data-reveal="title">SOME HOUSES ARE DRAWN<br>BEFORE THEY ARE BUILT</h2>
+    <p class="text-small text-center" data-reveal="text">and then built by the people who drew them</p>
+  </div>
+</section>
+
+<!-- 3 ── SENSATION ──────────────────────────────────────── -->
+<section class="section section--no-overflow ui-dark ui-background-alt l-sensation" id="sensation" data-themed="ui-dark" data-reveal-root>
+  <div class="l-sensation__bg appear" data-parallax-pattern="landingSensationBackground" data-parallax-measure=".section">
+    <img data-img="paint-aurora" data-w="720 1440 1920" sizes="100vw" alt="">
+  </div>
+  <div class="row l-sensation__row">
+    <h2 class="h1 col col--md-5 text-color-primary l-sensation__title" data-reveal="title">SOME THINGS CAN BE READ ABOUT. OTHERS HAVE TO BE STOOD IN, AT MIDNIGHT, IN THE COLD</h2>
+  </div>
+  <div class="row l-sensation__row2">
+    <figure class="col col--md-6 col--md-offset-3 parallax-image-move appear" data-parallax-pattern="imageMove">
+      <img data-img="suite-kitchen" data-w="720 1440 1920" sizes="50vw" alt="The kitchen island and dining table in the suite house">
+    </figure>
+    <p class="col col--md-2 col--md-offset-1 l-sensation__text" data-reveal="text" data-reveal-delay="250">A hot tub on the terrace, the mountains across the plain, and nobody between you and either of them. The nearest thing to a neighbour is the crater.</p>
+  </div>
+</section>
+
+<!-- 4 ── SUBLIME ───────────────────────────────────────── -->
+<section class="section section--full-height section--top ui-dark l-sublime" id="sublime" data-themed="ui-dark" data-reveal-root>
+  <div class="l-sublime__bg appear" data-parallax-pattern="backgroundMove" data-parallax-measure=".section">
+    <img data-img="paint-house-dusk" data-w="720 1440 1920" sizes="100vw" alt="Watercolour of a Kerbyggð house at dusk, its windows lit">
+  </div>
+  <div class="l-sublime__content" data-reveal-group data-reveal-delay="200">
+    <p class="text-small text-center" data-reveal="text">Four kinds of house.<br>Ninety-three square metres each.<br>Five minutes from the crater.</p>
+    <p class="text-subtitle text-center" data-reveal="subtitle">Lit from within</p>
+  </div>
+</section>
+
+<!-- 5 ── COLLECTION / the four houses (WebGL ring) ────────── -->
+<section class="section ui-dark ui-background-alt l-three-worlds" id="collection" data-hold data-themed="ui-dark" data-reveal-root>
+  <div class="l-three-worlds__bg appear" data-parallax-pattern="landingThreeWorldsBackground" data-parallax-measure=".section">
+    <img data-img="superior-kitchen" data-w="720 1024" sizes="100vw" alt="">
+  </div>
+  <div class="row l-three-worlds__intro">
+    <p class="col col--md-4 col--md-offset-4 text-center" data-reveal="text">Four kinds of house, all ninety-three square metres, all by the same architect. Three bedrooms or two, with or without a hot tub on the terrace.</p>
+  </div>
+
+  <div class="sticky sticky--full-height l-three-worlds__stage" id="worlds-stage">
+    <div class="sticky__layer sticky__layer--sticky l-three-worlds-webgl" data-parallax-pattern="landingThreeWorldsWebGl" data-parallax-measure=".sticky">
+      <canvas class="l-three-worlds-webgl__canvas" id="worlds-canvas"></canvas>
+    </div>
+    <div class="sticky__layer sticky__layer--sticky l-three-worlds__ui">
+      <h2 class="l-three-worlds__title" data-reveal-group data-parallax-pattern="landingThreeWorldsTitle" data-parallax-measure=".sticky">
+        <span class="text-subtitle" data-reveal="subtitle">The four</span>
+        <span class="h0" data-reveal="title">HOUSES</span>
+      </h2>
+      <div class="l-three-worlds__bottom">
+        <div class="l-three-worlds__names" id="worlds-names">
+          <span class="h1 l-three-worlds__name is-active" data-href="house-three.html" data-price="69,700" data-img="three-open-plan" data-w="1024">THREE BEDROOM</span>
+          <span class="h1 l-three-worlds__name" data-href="house-three-tub.html" data-price="76,700" data-img="three-bed-king" data-w="1024">THREE WITH TUB</span>
+          <span class="h1 l-three-worlds__name" data-href="house-superior.html" data-price="83,800" data-img="superior-kitchen" data-w="1024">SUPERIOR TWO</span>
+          <span class="h1 l-three-worlds__name" data-href="house-suite.html" data-price="85,900" data-img="suite-kitchen" data-w="1440">THE SUITE</span>
+          <p class="l-three-worlds__price text-small" id="worlds-price">From ISK <b>69,700</b> a night</p>
+          <a class="l-three-worlds__open text-small" id="worlds-link" href="house-three.html">View the house</a>
+        </div>
+        <div class="l-three-worlds__explore">
+          <span class="progress-ring" id="worlds-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="59.4" fill="none" stroke="rgba(244,235,220,.15)" stroke-width="1"/><circle class="progress-ring__bar" cx="60" cy="60" r="59.4" fill="none" stroke="#F4EBDC" stroke-width="1" stroke-dasharray="373.25" stroke-dashoffset="373.25"/></svg><span class="progress-ring__count text-small"><b id="worlds-counter">1</b> / 4</span></span>
+          <svg class="l-three-worlds__brand" viewBox="0 0 985.14 100" aria-hidden="true"><use href="#wm-word"/></svg>
+        </div>
+      </div>
+      <p class="l-three-worlds__hint text-small">Drag to browse<span>Click a house to open it</span></p>
+      <!-- keyboard route to the same four pages the ring opens on click -->
+      <ul class="l-three-worlds__links">
+        <li><a class="l-three-worlds__link" href="house-three.html">Three bedroom house</a></li>
+        <li><a class="l-three-worlds__link" href="house-three-tub.html">Three bedroom house with hot tub</a></li>
+        <li><a class="l-three-worlds__link" href="house-superior.html">Superior two bedroom house</a></li>
+        <li><a class="l-three-worlds__link" href="house-suite.html">Two bedroom suite house</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- touch gets a plain, fast picker; the ring above is desktop only. It carries
+       its own heading because hiding the ring also hides the ring's title layer. -->
+  <h2 class="l-rooms-mobile__head" data-reveal-group>
+    <span class="text-subtitle" data-reveal="subtitle">The four</span>
+    <span class="h0" data-reveal="title">HOUSES</span>
+  </h2>
+  <ul class="l-rooms-mobile js-rooms-mobile">
+    <li><a href="house-three.html"><span class="l-rooms-mobile__media appear"><img data-img="three-open-plan" data-w="720 1024" sizes="78vw" alt="The open plan living room and kitchen of the three bedroom house"></span><span class="h3">THREE BEDROOM</span><span class="text-small">93 m² · sleeps 6 · one bathroom<span class="l-rooms-mobile__price">From ISK 69,700 a night</span></span></a></li>
+    <li><a href="house-three-tub.html"><span class="l-rooms-mobile__media appear"><img data-img="three-bed-king" data-w="720 1024" sizes="78vw" alt="A king bed under the vaulted ceiling"></span><span class="h3">THREE WITH TUB</span><span class="text-small">93 m² · sleeps 6 · private hot tub<span class="l-rooms-mobile__price">From ISK 76,700 a night</span></span></a></li>
+    <li><a href="house-superior.html"><span class="l-rooms-mobile__media appear"><img data-img="superior-kitchen" data-w="720 1024" sizes="78vw" alt="The kitchen and living room of the superior two bedroom house"></span><span class="h3">SUPERIOR TWO</span><span class="text-small">93 m² · sleeps 5 · two ensuites · hot tub<span class="l-rooms-mobile__price">From ISK 83,800 a night</span></span></a></li>
+    <li><a href="house-suite.html"><span class="l-rooms-mobile__media appear"><img data-img="suite-kitchen" data-w="720 1440" sizes="78vw" alt="The kitchen island and dining table in the suite house"></span><span class="h3">THE SUITE</span><span class="text-small">93 m² · sleeps 4 · two ensuites · hot tub<span class="l-rooms-mobile__price">From ISK 85,900 a night</span></span></a></li>
+  </ul>
+  <div class="room-cursor" id="room-cursor" aria-hidden="true">
+    <svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="47" fill="rgba(15,21,20,.35)" stroke="rgba(244,235,220,.6)" stroke-width="1"/></svg>
+    <span class="room-cursor__inner"><b>View</b><span class="room-cursor__room">Three bedroom</span></span>
+  </div>
+</section>
+
+<!-- 6 ── TENETS / the house on the heath ─────────────────── -->
+<section class="section ui-light l-tenets-section" id="tenets" data-themed="ui-dark" data-reveal-root>
+  <div class="sticky sticky--full-height sticky--under-previous sticky--under-next l-tenets">
+    <div class="sticky__layer sticky__layer--sticky l-tenets__pin">
+      <figure class="l-tenets__bg appear" data-parallax-pattern="landingTenetsBackground" data-parallax-measure=".sticky">
+        <img data-img="paint-house-day" data-w="720 1440 1920" sizes="100vw" alt="Watercolour of a Kerbyggð house on the moss, mountains behind">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ── EXPANSIVE / the family, horizontal chapter ──────── -->
+<section class="section ui-light l-expansive-section" id="expansive" data-hold data-themed="ui-light" data-reveal-root
+         data-gravity-well='[{"viewport":0,"element":0}]'>
+  <div class="sticky-slider sticky-slider--full-screen js-sticky-slider">
+    <div class="sticky-slider__sticky">
+      <div class="l-expansive-slider" data-sticky-slider-content>
+
+        <!-- (1) intro slide with the growing card -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--intro">
+          <div class="l-expansive-card js-expansive-card" data-parallax-pattern="landingExpansiveCard landingExpansiveCardScale" data-parallax-measure=".section">
+            <div class="l-expansive-card__inner ui-light">
+              <div class="l-expansive-card__head">
+                <svg class="l-expansive-card__logo" viewBox="0 0 300 62" aria-hidden="true"><use href="#wm-ridge-s"/></svg>
+                <h2 class="l-expansive-card__title" data-parallax-pattern="landingExpansiveCardText" data-parallax-measure=".section">THE FAMILY</h2>
+              </div>
+              <div class="l-expansive-card__body" data-parallax-pattern="landingExpansiveCardContent" data-parallax-measure=".section">
+                <p class="l-expansive-card__lead">A family run business. The architect who designed the houses is the one who lives here.</p>
+                <div class="l-expansive-card__media" data-parallax-pattern="landingExpansiveCardVideo" data-parallax-measure=".section">
+                  <figure class="appear"><img data-img="house-aerial" data-w="720 1440" sizes="50vw" alt="A Kerbyggð house from the air"></figure>
+                </div>
+                <div class="l-expansive-card__side" data-reveal-group>
+                  <p class="l-expansive-card__subtitle"><span class="text-subtitle-small" data-reveal="subtitle">Drawn by</span><span class="h2" data-reveal="title">INGA</span></p>
+                  <p class="l-expansive-card__text" data-reveal="text">Inga is an architect and designed the project. Ísak and their sons helped build the houses. They still run the place themselves.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- (2) full image -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--full">
+          <figure class="parallax-image-move parallax-image-move--x appear js-hmove"><img data-img="paint-kerid" data-w="720 1200 1600" sizes="100vw" alt="Watercolour of the Kerið crater and its lake"></figure>
+        </div>
+
+        <!-- (3) One / ARCHITECT -->
+        <div class="l-expansive-slider__item">
+          <div class="row l-expansive-slider__split">
+            <div class="col col--md-4 col--md-offset-2 l-expansive-slider__copy" data-reveal-group data-reveal-distance="0">
+              <h3 class="l-expansive-slider__h"><span class="text-subtitle-small" data-reveal="subtitle">One</span><span class="h2" data-reveal="title">ARCHITECT</span></h3>
+              <p data-reveal="text">All the houses are designed by the same architect, so they share a style and differ in what they give you. Ninety-three square metres each, a fully equipped kitchen, a dining area, a living room, and a private terrace facing the mountains.</p>
+            </div>
+            <figure class="col col--md-5 parallax-image-move parallax-image-move--x appear js-hmove l-expansive-slider__img-640"><img data-img="living-view" data-w="720 1024" sizes="45vw" alt="The living room and its corner windows"></figure>
+          </div>
+        </div>
+
+        <!-- (4) full image -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--full">
+          <figure class="parallax-image-move parallax-image-move--x appear js-hmove"><img data-img="suite-bath-bed" data-w="720 1440 1920" sizes="100vw" alt="The bathroom and bedroom of the suite house"></figure>
+        </div>
+
+        <!-- (5) What is / INCLUDED -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--finesse">
+          <div class="row">
+            <div class="col col--md-3 col--md-offset-1 l-expansive-slider__copy" data-reveal-group data-reveal-distance="0">
+              <h3 class="l-expansive-slider__h"><span class="text-subtitle-small" data-reveal="subtitle">What is</span><span class="h2" data-reveal="title">INCLUDED</span></h3>
+              <p data-reveal="text">Bed linen, towels and the final cleaning. Bathrobes and slippers. Coffee, tea, olive oil, salt and pepper in the kitchen. Underfloor heating, a washing machine and a tumble dryer in every house.</p>
+            </div>
+            <div class="col col--md-7 l-expansive-slider__tiles">
+              <figure class="l-expansive-slider__tile appear parallax-image-move parallax-image-move--x js-hmove"><img data-img="int-bath-tub" data-w="720 1024" sizes="20vw" alt="A bathroom with a free standing bath"></figure>
+              <figure class="l-expansive-slider__tile appear parallax-image-move parallax-image-move--x js-hmove"><img data-img="int-bed-blue" data-w="720 1024" sizes="20vw" alt="A bedroom, morning light on the bed"></figure>
+              <figure class="l-expansive-slider__tile appear parallax-image-move parallax-image-move--x js-hmove"><img data-img="int-kitchen-view" data-w="720 1024" sizes="20vw" alt="The kitchen island and the terrace door"></figure>
+            </div>
+          </div>
+        </div>
+
+        <!-- (6) full image -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--full">
+          <figure class="parallax-image-move parallax-image-move--x appear js-hmove"><img data-img="int-bed-chair" data-w="720 1024" sizes="100vw" alt="A bedroom with a reading chair by the window"></figure>
+        </div>
+
+        <!-- (7) On the / TERRACE -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--amenities">
+          <div class="row">
+            <div class="col col--md-3 col--md-offset-1 l-expansive-slider__copy" data-reveal-group data-reveal-distance="0">
+              <h3 class="l-expansive-slider__h"><span class="text-subtitle-small" data-reveal="subtitle">On the</span><span class="h2" data-reveal="title">TERRACE</span></h3>
+              <p class="h3" data-reveal="text">A PRIVATE HOT TUB, A BARBECUE FROM THE FIRST OF MAY TO THE FIRST OF NOVEMBER, AND THE MOUNTAINS ACROSS THE PLAIN.</p>
+            </div>
+            <figure class="col col--md-4 appear parallax-image-move parallax-image-move--x js-hmove l-expansive-slider__img-600"><img data-img="house-aerial" data-w="720 1440" sizes="35vw" alt="The deck and hot tub seen from above"></figure>
+            <figure class="col col--md-3 appear parallax-image-move parallax-image-move--x js-hmove l-expansive-slider__img-440"><img data-img="three-open-plan" data-w="720 1024" sizes="25vw" alt="The open plan living room and kitchen"></figure>
+          </div>
+        </div>
+
+        <!-- (8) full image -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--full">
+          <figure class="parallax-image-move parallax-image-move--x appear js-hmove"><img data-img="superior-bath-bed" data-w="720 1024" sizes="100vw" alt="An ensuite and bedroom in the superior two bedroom house"></figure>
+        </div>
+
+        <!-- (9) Booked / DIRECT -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--service">
+          <div class="row l-expansive-slider__service">
+            <figure class="l-expansive-slider__svc-side appear parallax-image-move parallax-image-move--x js-hmove"><img data-img="int-bed-blue" data-w="720 1024" sizes="20vw" alt="A bedroom, morning light on the bed"></figure>
+            <figure class="l-expansive-slider__svc-center appear parallax-image-move parallax-image-move--x js-hmove"><img data-img="superior-kitchen" data-w="720 1024" sizes="28vw" alt="The kitchen and living room of the superior house"></figure>
+            <figure class="l-expansive-slider__svc-side appear parallax-image-move parallax-image-move--x js-hmove"><img data-img="three-bed-king" data-w="720 1024" sizes="20vw" alt="A king bed under the vaulted ceiling"></figure>
+            <div class="l-expansive-slider__svc-copy" data-reveal-group data-reveal-distance="0">
+              <h3 class="l-expansive-slider__h"><span class="text-subtitle-small" data-reveal="subtitle">Booked</span><span class="h2" data-reveal="title">DIRECT</span></h3>
+              <p data-reveal="text">Book on this page and a bottle of sparkling wine is waiting when you arrive. Stay more than four days and ten percent comes off the booking.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- (10) long nights, dark slide -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--privacy ui-dark">
+          <figure class="l-expansive-slider__privacy-media appear parallax-image-move parallax-image-move--x js-hmove"><img data-img="paint-aurora" data-w="720 1440 1920" sizes="190vh" alt="Watercolour of the aurora over the lava plain"></figure>
+          <h3 class="l-expansive-slider__privacy-title" data-reveal-group data-reveal-distance="0"><span class="text-subtitle-small" data-reveal="subtitle">Long</span><span class="h2" data-reveal="title">NIGHTS</span></h3>
+        </div>
+
+        <!-- (11) guest quote + 3-image column -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--privacy-text ui-dark">
+          <div class="row">
+            <p class="col col--md-4 col--md-offset-1 h3 l-expansive-slider__privacy-text" data-reveal="text" data-reveal-distance="0">“THESE ARE BEAUTIFUL, MODERN COTTAGES SET IN AN ALMOST OTHERWORLDLY LOCALE.” CHRISTOPHER, UNITED STATES</p>
+            <div class="col col--md-5 col--md-offset-1 l-expansive-slider__column" data-parallax-pattern="landingExpansiveCarousel">
+              <figure class="appear"><img data-img="plate-05" data-w="720 1200" sizes="40vw" alt="Watercolour plate of cotton grass"></figure>
+              <figure class="appear"><img data-img="plate-02" data-w="720 1200" sizes="40vw" alt="Watercolour plate of Nootka lupine"></figure>
+              <figure class="appear"><img data-img="plate-11" data-w="720 1200" sizes="40vw" alt="Watercolour plate of woolly fringe moss on lava"></figure>
+            </div>
+          </div>
+        </div>
+
+        <!-- (12) last slide -->
+        <div class="l-expansive-slider__item l-expansive-slider__item--last ui-dark">
+          <figure class="parallax-image-move parallax-image-move--x appear js-hmove js-hmove-last"><img data-img="paint-house-dusk" data-w="720 1440 1920" sizes="100vw" alt="Watercolour of a Kerbyggð house at dusk"></figure>
+          <div class="l-expansive-slider__last-copy" data-reveal-group data-reveal-distance="0">
+            <h3 class="l-expansive-slider__h text-center"><span class="text-subtitle" data-reveal="subtitle">A house</span><span class="h1" data-reveal="title">APART</span></h3>
+            <p class="text-center" data-reveal="text">Kerbyggð 1, in Grímsnes. Five minutes from the crater, and far enough from the road that you hear nothing from it.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ── SELECTION / the herbarium (a hung wall you pan and drag) ───────── -->
+<section class="section ui-dark l-selection" id="selection" data-hold data-themed="ui-dark" data-reveal-root
+         data-gravity-well='[{"viewport":0,"element":0}]'>
+  <div class="l-hang" id="hang-stage">
+    <div class="sticky__layer sticky__layer--sticky l-hang__pin">
+      <div class="l-hang__track js-hang-track">
+        <figure class="l-hang__item l-hang__item--tall appear"><img data-img="plate-01" data-w="720 1200" sizes="26vw" alt="Watercolour plate of mountain avens, holtasóley"></figure>
+        <figure class="l-hang__item appear"><img data-img="plate-02" data-w="720 1200" sizes="24vw" alt="Watercolour plate of Nootka lupine, lúpína"></figure>
+        <figure class="l-hang__item l-hang__item--low appear"><img data-img="plate-03" data-w="720 1200" sizes="22vw" alt="Watercolour plate of wood cranesbill, blágresi"></figure>
+        <figure class="l-hang__item l-hang__item--tall appear"><img data-img="plate-04" data-w="720 1200" sizes="26vw" alt="Watercolour plate of dwarf fireweed, eyrarrós"></figure>
+        <figure class="l-hang__item appear"><img data-img="plate-05" data-w="720 1200" sizes="24vw" alt="Watercolour plate of cotton grass, fífa"></figure>
+        <figure class="l-hang__item l-hang__item--low appear"><img data-img="plate-06" data-w="720 1200" sizes="22vw" alt="Watercolour plate of arctic thyme, blóðberg"></figure>
+        <figure class="l-hang__item appear"><img data-img="plate-07" data-w="720 1200" sizes="24vw" alt="Watercolour plate of crowberry, krækilyng"></figure>
+        <figure class="l-hang__item l-hang__item--tall appear"><img data-img="plate-08" data-w="720 1200" sizes="26vw" alt="Watercolour plate of angelica, hvönn"></figure>
+        <figure class="l-hang__item l-hang__item--low appear"><img data-img="plate-09" data-w="720 1200" sizes="22vw" alt="Watercolour plate of heather, beitilyng"></figure>
+        <figure class="l-hang__item appear"><img data-img="plate-10" data-w="720 1200" sizes="24vw" alt="Watercolour plate of downy birch, birki"></figure>
+        <figure class="l-hang__item l-hang__item--tall appear"><img data-img="plate-11" data-w="720 1200" sizes="26vw" alt="Watercolour plate of woolly fringe moss on lava, gamburmosi"></figure>
+        <figure class="l-hang__item l-hang__item--low appear"><img data-img="plate-12" data-w="720 1200" sizes="22vw" alt="Watercolour plate of moss campion, lambagras"></figure>
+      </div>
+      <div class="l-hang__rail" aria-hidden="true"><span class="l-hang__rail-fill js-hang-fill"></span></div>
+      <p class="l-hang__count text-small"><b class="js-hang-index">01</b> / <span class="js-hang-total">12</span></p>
+      <p class="l-hang__hint text-small">Drag to walk the wall</p>
+    </div>
+    <div class="sticky__layer sticky__layer--sticky l-selection__title" data-parallax-pattern="landingHandpickedTitle" data-parallax-measure=".l-hang">
+      <div data-reveal-group data-reveal-threshold="1">
+        <p class="text-subtitle text-center" data-reveal="subtitle">Twelve plates</p>
+        <p class="text-small text-center" data-reveal="text">of what grows where the houses stand</p>
+      </div>
+    </div>
+  </div>
+  <div class="l-selection__flow">
+    <div class="row">
+      <p class="col col--md-3 col--md-offset-2 h3 text-color-primary-alt" data-reveal="text">The heath the houses stand on is not empty. Mountain avens and moss campion in the gravel, arctic thyme where it is dry, cotton grass where it is wet, and woolly fringe moss over the lava the whole way to the crater. Twelve of them were painted for this site.</p>
+    </div>
+    <div class="l-selection__spacer"></div>
+    <div class="row">
+      <p class="col col--md-5 col--md-offset-7 h3 l-selection__statement" data-reveal="title">A HOUSE IN A LANDSCAPE BORROWS EVERYTHING FROM IT, so it is worth knowing what is actually out there, at ankle height, <em>between</em> the terrace and the mountain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 ── LOCATIONS / the Golden Circle map ─────────────────── -->
+<section class="section ui-dark ui-background-alt l-location" id="locations" data-hold data-themed="ui-dark" data-reveal-root
+         data-gravity-well='[{"viewport":0,"element":0},{"viewport":-490,"element":0},{"viewport":100,"element":100}]'>
+  <div class="l-location__grid">
+    <div class="sticky sticky--full-height l-location__map-layer">
+      <div class="sticky__layer sticky__layer--sticky l-location__map-pin">
+        <div class="l-location__map js-location-map" data-parallax-pattern="landingLocationMapDesktop" data-parallax-measure=".sticky">
+    <div class="l-location__map-inner js-map-inner">
+      <img class="l-location__map-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1792' height='1536'%3E%3C/svg%3E" data-src="assets/img/map-dark.webp" alt="" width="1792" height="1536" decoding="async">
+      <!--MAP-ROUTES:start--><svg class="l-location__routes js-routes" viewBox="0 0 116.667 100" preserveAspectRatio="none" aria-hidden="true">
+      <path class="l-location__route" data-route="0" d="M 37.045 80.233 L 37.029 80.279 L 36.939 80.541 L 37.029 81.059 L 37.029 81.081 L 37.024 81.107 L 36.992 81.093 L 36.917 81.065 L 36.839 81.036 L 36.742 80.997 L 36.625 80.946 L 36.150 80.718 L 36.110 80.700 L 36.090 80.696 L 36.069 80.692 L 36.041 80.690 L 35.832 80.680 L 35.795 80.677 L 35.777 80.673 L 35.760 80.664 L 35.743 80.652 L 35.727 80.635 L 35.712 80.618 L 35.563 80.438 L 35.416 80.245 L 35.294 80.084 L 35.165 79.899 L 35.068 79.758 L 35.053 79.736 L 34.944 79.579 L 34.887 79.498 L 34.859 79.439 L 34.821 79.403 L 34.805 79.394 L 35.413 78.433 L 35.538 78.235 L 35.861 77.731 L 35.930 77.630 L 35.999 77.538 L 36.085 77.436 L 36.188 77.325 L 36.222 77.343 L 36.236 77.351 L 36.295 77.387 L 36.293 77.392 L 36.293 77.397 L 36.295 77.403 L 36.298 77.407 L 36.303 77.410 L 36.308 77.411 L 36.306 77.421 L 36.276 77.477 L 36.274 77.479" fill="none"/>
+      <path class="l-location__route" data-route="1" d="M 37.045 80.233 L 37.029 80.279 L 36.939 80.541 L 37.029 81.059 L 37.029 81.081 L 37.024 81.107 L 36.992 81.093 L 36.917 81.065 L 36.839 81.036 L 36.742 80.997 L 36.625 80.946 L 36.150 80.718 L 36.110 80.700 L 36.090 80.696 L 36.069 80.692 L 36.041 80.690 L 35.832 80.680 L 35.795 80.677 L 35.777 80.673 L 35.760 80.664 L 35.743 80.652 L 35.727 80.635 L 35.712 80.618 L 35.563 80.438 L 35.416 80.245 L 35.294 80.084 L 35.165 79.899 L 35.068 79.758 L 35.053 79.736 L 34.944 79.579 L 34.887 79.498 L 34.859 79.439 L 34.821 79.403 L 34.805 79.394 L 34.735 79.496 L 34.642 79.613 L 34.581 79.681 L 34.434 79.841 L 34.334 79.945 L 34.250 80.029 L 34.146 80.128 L 34.021 80.240 L 33.880 80.357 L 33.743 80.464 L 33.545 80.604 L 33.277 80.779 L 33.145 80.869 L 33.109 80.894 L 33.070 80.927 L 33.013 80.984 L 32.861 81.154 L 32.810 81.203 L 32.753 81.251 L 32.684 81.303 L 32.641 81.332 L 32.609 81.351 L 32.531 81.399 L 32.458 81.442 L 32.408 81.474 L 32.345 81.524 L 32.296 81.573 L 32.251 81.623 L 32.213 81.677 L 32.149 81.780 L 32.118 81.829 L 32.101 81.857 L 32.026 81.976 L 31.976 82.048 L 31.939 82.094 L 31.823 82.225 L 31.645 82.404 L 31.505 82.534 L 31.434 82.589 L 31.343 82.649 L 31.189 82.746 L 31.129 82.792 L 30.939 82.953 L 30.719 83.119 L 30.421 83.333 L 30.293 82.959 L 30.137 82.503 L 30.096 82.384 L 30.031 82.191 L 30.015 82.146 L 29.975 82.028 L 29.881 81.750 L 29.806 81.531 L 29.761 81.402 L 29.682 81.169 L 29.657 81.101 L 29.610 80.964 L 29.521 80.704 L 29.468 80.544 L 29.446 80.474 L 29.432 80.421 L 29.427 80.395 L 29.421 80.351 L 29.415 80.282 L 29.406 80.182 L 29.406 80.168 L 29.402 80.095 L 29.384 79.908 L 29.377 79.835 L 29.367 79.777 L 29.357 79.730 L 29.344 79.693 L 29.326 79.649 L 29.308 79.610 L 29.284 79.567 L 29.216 79.445 L 29.198 79.408 L 29.184 79.376 L 29.173 79.343 L 29.162 79.302 L 29.108 79.063 L 29.073 78.904 L 29.002 78.556 L 28.951 78.335 L 28.935 78.270 L 28.925 78.239 L 28.916 78.213 L 28.873 78.112 L 28.711 77.749 L 28.669 77.646 L 28.637 77.552 L 28.618 77.494 L 28.604 77.441 L 28.587 77.366 L 28.575 77.292 L 28.524 76.888 L 28.515 76.770 L 28.513 76.715 L 28.512 76.666 L 28.513 76.625 L 28.516 76.581 L 28.529 76.514 L 28.538 76.473 L 28.549 76.438 L 28.718 75.982 L 28.757 75.865 L 28.787 75.766 L 28.818 75.654 L 28.834 75.586 L 28.846 75.516 L 28.856 75.451 L 28.862 75.389 L 28.866 75.330 L 28.866 75.274 L 28.863 75.151 L 28.857 75.079 L 28.850 75.020 L 28.841 74.962 L 28.832 74.915 L 28.818 74.857 L 28.800 74.799 L 28.777 74.730 L 28.746 74.645 L 28.726 74.597 L 28.706 74.557 L 28.494 74.170 L 28.274 73.755 L 27.958 73.164 L 27.867 72.994 L 27.807 72.876 L 27.726 72.728 L 27.694 72.663 L 27.667 72.595 L 27.651 72.545 L 27.640 72.504 L 27.631 72.452 L 27.627 72.413 L 27.621 72.348 L 27.620 72.294 L 27.620 72.242 L 27.622 72.182 L 27.651 71.525 L 27.646 71.400 L 27.639 71.280 L 27.626 71.174 L 27.612 71.074 L 27.527 70.521 L 27.505 70.409 L 27.475 70.294 L 27.437 70.182 L 27.395 70.078 L 27.334 69.950 L 27.271 69.842 L 27.190 69.717 L 27.073 69.544 L 27.004 69.444 L 26.955 69.371 L 26.897 69.284 L 26.847 69.203 L 26.801 69.118 L 26.763 69.033 L 26.717 68.909 L 26.700 68.854 L 26.689 68.808 L 26.672 68.732 L 26.659 68.658 L 26.648 68.574 L 26.642 68.488 L 26.640 68.425 L 26.648 68.317 L 26.663 68.194 L 26.722 67.911 L 26.734 67.834 L 26.739 67.758 L 26.740 67.695 L 26.732 67.630 L 26.724 67.592 L 26.715 67.562 L 26.698 67.515 L 26.671 67.447 L 26.655 67.416 L 26.635 67.379 L 26.612 67.344 L 26.586 67.309 L 26.550 67.268 L 26.500 67.217 L 26.439 67.166 L 26.389 67.131 L 26.322 67.097 L 26.274 67.076 L 26.244 67.065 L 26.114 67.032 L 25.900 66.985 L 25.833 66.969 L 25.782 66.955 L 25.704 66.926 L 25.650 66.899 L 25.609 66.872 L 25.589 66.860 L 25.532 66.820 L 25.382 66.696 L 25.284 66.613 L 25.268 66.599 L 25.245 66.579 L 25.193 66.531 L 25.161 66.499 L 25.132 66.466 L 25.101 66.427 L 25.073 66.389 L 25.045 66.350 L 25.025 66.319 L 25.006 66.284 L 24.986 66.243 L 24.970 66.205 L 24.966 66.197 L 24.953 66.162 L 24.937 66.116 L 24.920 66.059 L 24.906 66.006 L 24.898 65.977 L 24.862 65.847 L 24.840 65.779 L 24.821 65.728 L 24.798 65.672 L 24.778 65.629 L 24.765 65.602 L 24.754 65.581 L 24.733 65.543 L 24.710 65.503 L 24.658 65.421 L 24.602 65.336 L 24.542 65.245 L 24.420 65.062 L 24.391 65.016 L 24.361 64.970 L 24.330 64.909 L 24.304 64.860 L 24.279 64.814 L 24.254 64.757 L 24.225 64.690 L 24.190 64.595 L 24.157 64.497 L 24.130 64.424 L 24.105 64.357 L 24.079 64.304 L 24.057 64.260 L 24.028 64.209 L 24.002 64.166 L 23.974 64.120 L 23.930 64.055 L 23.870 63.972 L 23.762 63.830 L 23.683 63.727 L 23.677 63.720 L 23.486 63.472 L 23.353 63.298 L 23.329 63.263 L 23.309 63.231 L 23.291 63.199 L 23.276 63.169 L 23.253 63.116 L 23.232 63.054 L 23.215 62.987 L 23.206 62.949 L 23.198 62.910 L 23.193 62.870 L 23.188 62.824 L 23.185 62.764 L 23.185 62.723 L 23.185 62.680 L 23.187 62.643 L 23.194 62.600 L 23.203 62.550 L 23.213 62.506 L 23.221 62.473 L 23.231 62.436 L 23.243 62.395 L 23.269 62.330 L 23.423 61.968 L 23.552 61.664 L 23.692 61.340 L 23.735 61.235 L 23.750 61.191 L 23.761 61.155 L 23.769 61.118 L 23.777 61.076 L 23.784 61.032 L 23.791 60.966 L 23.792 60.913 L 23.792 60.862 L 23.787 60.796 L 23.784 60.752 L 23.770 60.625 L 23.737 60.326 L 23.730 60.238 L 23.726 60.168 L 23.722 60.087 L 23.722 60.024 L 23.723 59.964 L 23.723 59.903 L 23.723 59.847 L 23.739 59.643 L 23.749 59.531 L 23.755 59.477 L 23.763 59.428 L 23.773 59.385 L 23.788 59.339 L 23.808 59.291 L 23.827 59.250 L 23.843 59.216 L 23.863 59.181 L 23.890 59.141 L 23.918 59.106 L 23.943 59.074 L 23.986 59.029 L 24.014 59.004 L 24.050 58.974 L 24.093 58.941 L 24.138 58.900 L 24.175 58.865 L 24.209 58.829 L 24.248 58.781 L 24.280 58.733 L 24.310 58.680 L 24.329 58.640 L 24.345 58.600 L 24.357 58.566 L 24.373 58.508 L 24.383 58.458 L 24.387 58.426 L 24.390 58.394 L 24.392 58.353 L 24.392 58.306 L 24.389 58.257 L 24.379 58.195 L 24.368 58.154 L 24.352 58.100 L 24.335 58.052 L 24.312 58.005 L 24.294 57.973 L 24.275 57.941 L 24.256 57.916 L 24.233 57.885 L 24.202 57.849 L 24.172 57.820 L 24.143 57.791 L 24.100 57.753 L 24.070 57.728 L 24.025 57.695 L 23.962 57.647 L 23.807 57.532 L 23.752 57.491 L 23.695 57.446 L 23.658 57.413 L 23.619 57.376 L 23.584 57.339 L 23.539 57.286 L 23.497 57.229 L 23.467 57.183 L 23.438 57.132 L 23.410 57.075 L 23.387 57.025 L 23.366 56.969 L 23.346 56.906 L 23.331 56.846 L 23.311 56.746 L 23.263 56.496 L 23.251 56.443 L 23.222 56.309 L 23.192 56.184 L 23.029 55.542 L 22.988 55.377 L 22.927 55.131 L 22.808 54.645 L 22.566 53.595 L 22.544 53.498 L 22.469 53.190 L 22.212 52.119 L 22.091 51.611 L 22.019 51.305 L 21.766 50.220 L 21.588 49.476 L 21.559 49.348 L 21.541 49.247 L 21.534 49.202 L 21.530 49.162 L 21.525 49.076 L 21.524 48.965 L 21.525 48.864 L 21.532 48.767 L 21.540 48.698 L 21.554 48.617 L 21.570 48.540 L 21.594 48.451 L 21.620 48.366 L 21.650 48.281 L 21.689 48.184 L 21.728 48.103 L 21.772 48.016 L 21.824 47.930 L 21.884 47.841 L 21.939 47.765 L 21.998 47.690 L 22.090 47.582 L 22.181 47.472 L 22.239 47.396 L 22.289 47.323 L 22.341 47.239 L 22.385 47.161 L 22.442 47.043 L 22.479 46.952 L 22.506 46.876 L 22.536 46.781 L 22.561 46.679 L 22.574 46.616 L 22.589 46.539 L 22.596 46.495 L 22.608 46.416 L 22.626 46.289 L 22.845 44.544 L 22.863 44.407 L 22.869 44.340 L 22.873 44.273 L 22.875 44.206 L 22.873 44.130 L 22.870 44.085 L 22.863 43.989 L 22.859 43.944 L 22.861 43.904 L 22.865 43.869 L 22.875 43.837 L 22.885 43.812 L 22.896 43.790 L 22.912 43.763 L 22.931 43.746 L 22.943 43.735 L 22.953 43.727 L 22.966 43.718 L 22.948 43.702 L 22.916 43.675 L 22.883 43.642 L 22.843 43.604 L 22.788 43.547 L 22.737 43.489 L 22.683 43.424 L 22.639 43.365 L 22.608 43.322 L 22.547 43.227 L 22.461 43.081 L 21.905 42.096 L 21.807 41.913 L 21.734 41.753 L 20.513 38.947 L 20.477 38.856 L 20.456 38.794 L 20.440 38.740 L 20.429 38.694 L 20.418 38.647 L 20.409 38.592 L 20.403 38.536 L 20.399 38.482 L 20.396 38.442 L 20.396 38.388 L 20.398 38.334 L 20.401 38.294 L 20.408 38.236 L 20.417 38.165 L 20.444 37.992 L 20.472 37.794 L 20.501 37.607 L 20.504 37.586 L 20.511 37.542 L 20.514 37.517 L 20.546 37.294 L 20.606 36.892 L 20.616 36.839 L 20.627 36.789 L 20.637 36.755 L 20.646 36.729 L 20.655 36.708 L 20.663 36.690 L 20.687 36.647 L 20.706 36.618 L 20.724 36.592 L 20.744 36.568 L 20.763 36.547 L 20.778 36.532 L 20.802 36.511 L 20.835 36.485 L 20.863 36.466 L 20.891 36.449 L 20.914 36.437 L 20.938 36.426 L 20.966 36.415 L 21.038 36.392 L 21.226 36.339 L 21.421 36.286 L 21.459 36.275 L 21.488 36.267 L 21.524 36.254 L 21.557 36.243 L 21.577 36.235 L 21.581 36.233 L 21.604 36.223 L 21.646 36.203 L 21.686 36.183 L 21.717 36.165 L 21.810 36.115 L 21.860 36.089 L 21.894 36.072 L 21.928 36.058 L 21.967 36.041 L 22.005 36.027 L 22.046 36.014 L 22.077 36.007 L 22.092 36.005 L 22.109 36.002 L 22.134 36.000 L 22.172 35.999 L 22.202 35.998 L 22.262 35.999 L 22.294 35.997 L 22.322 35.994 L 22.347 35.990 L 22.379 35.983 L 22.400 35.978 L 22.422 35.970 L 22.442 35.962 L 22.467 35.951 L 22.488 35.940 L 22.506 35.931 L 22.529 35.916 L 22.552 35.899 L 22.571 35.884 L 22.588 35.870 L 22.605 35.853 L 22.627 35.830 L 22.642 35.810 L 22.662 35.783 L 22.680 35.756 L 22.691 35.735 L 22.700 35.715 L 22.712 35.687 L 22.725 35.650 L 22.777 35.504 L 22.795 35.451 L 22.809 35.403 L 22.820 35.354 L 22.828 35.318 L 22.832 35.285 L 22.836 35.240 L 22.838 35.203 L 22.838 35.171 L 22.836 35.139 L 22.833 35.106 L 22.825 35.059 L 22.815 34.986 L 22.810 34.919 L 22.806 34.875 L 22.804 34.831 L 22.804 34.792 L 22.803 34.748 L 22.804 34.711 L 22.808 34.661 L 22.812 34.620 L 22.826 34.509 L 22.836 34.444 L 22.847 34.380 L 22.864 34.292 L 22.878 34.236 L 22.893 34.180 L 22.924 34.087 L 22.954 34.002 L 23.135 33.602 L 23.170 33.523 L 23.197 33.459 L 23.215 33.404 L 23.230 33.343 L 23.243 33.270 L 23.248 33.218 L 23.249 33.173 L 23.247 33.072 L 23.237 32.935 L 23.233 32.867 L 23.232 32.800 L 23.236 32.759 L 23.243 32.716 L 23.253 32.667 L 23.262 32.632 L 23.267 32.620 L 23.274 32.602 L 23.330 32.469 L 23.347 32.429 L 23.358 32.389 L 23.367 32.338 L 23.375 32.279 L 23.409 31.984 L 23.410 31.950 L 23.410 31.925 L 23.407 31.891 L 23.403 31.867 L 23.399 31.847 L 23.394 31.831 L 23.386 31.803 L 23.379 31.785 L 23.368 31.761 L 23.358 31.742 L 23.343 31.721 L 23.331 31.704 L 23.205 31.567 L 23.167 31.519 L 23.132 31.470 L 23.104 31.428 L 23.081 31.389 L 23.059 31.352 L 23.038 31.311 L 23.022 31.274 L 23.005 31.232 L 22.989 31.186 L 22.975 31.144 L 22.961 31.094 L 22.951 31.049 L 22.932 30.953 L 22.905 30.822 L 22.890 30.750 L 22.871 30.667 L 22.858 30.622 L 22.842 30.578 L 22.825 30.544 L 22.803 30.508 L 22.791 30.493 L 22.778 30.478 L 22.758 30.460 L 22.733 30.442 L 22.707 30.424 L 22.683 30.410 L 22.640 30.391 L 22.613 30.381 L 22.591 30.375 L 22.567 30.372 L 22.543 30.370 L 22.519 30.370 L 22.482 30.372 L 22.408 30.375 L 22.372 30.375 L 22.345 30.372 L 22.318 30.366 L 22.294 30.357 L 22.259 30.342 L 22.223 30.323 L 22.191 30.303 L 22.170 30.287 L 22.152 30.271 L 22.128 30.246 L 22.106 30.221 L 22.086 30.195 L 22.054 30.142 L 22.039 30.121 L 22.022 30.097 L 21.992 30.062 L 21.961 30.035 L 21.935 30.016 L 21.904 29.996 L 21.877 29.982 L 21.853 29.973 L 21.819 29.961 L 21.788 29.953 L 21.754 29.949 L 21.727 29.947 L 21.698 29.947 L 21.669 29.949 L 21.597 29.955 L 21.560 29.958 L 21.490 29.963 L 21.430 29.967 L 21.353 29.968 L 21.286 29.966 L 21.226 29.960 L 21.163 29.947 L 21.131 29.940 L 21.109 29.933 L 21.072 29.921 L 21.024 29.902 L 20.996 29.890 L 20.962 29.873 L 20.896 29.835 L 20.831 29.785 L 20.778 29.738 L 20.758 29.718 L 20.736 29.693 L 20.689 29.636 L 20.658 29.594 L 20.640 29.564 L 20.606 29.501 L 20.570 29.438 L 20.535 29.366 L 20.523 29.342 L 20.504 29.311 L 20.460 29.236 L 20.370 29.105 L 20.313 29.032 L 20.257 28.968 L 20.218 28.927 L 20.207 28.916 L 20.174 28.883 L 20.091 28.800 L 20.017 28.739 L 19.921 28.655 L 19.888 28.624 L 19.839 28.578 L 19.764 28.503 L 19.673 28.396 L 19.623 28.331 L 19.584 28.271 L 19.561 28.236 L 19.548 28.215 L 19.507 28.144 L 19.480 28.092 L 19.456 28.037 L 19.414 27.943 L 19.320 27.714 L 19.287 27.644 L 19.270 27.615 L 19.248 27.583 L 19.237 27.569 L 19.222 27.551 L 19.204 27.532 L 19.100 27.442 L 19.072 27.418 L 19.007 27.358 L 18.969 27.328 L 18.943 27.305 L 18.888 27.258 L 18.852 27.224 L 18.828 27.198 L 18.745 27.111 L 18.715 27.079 L 18.690 27.049 L 18.660 27.012 L 18.641 26.986 L 18.616 26.949 L 18.592 26.909 L 18.574 26.872 L 18.558 26.837 L 18.546 26.804 L 18.534 26.768 L 18.525 26.733 L 18.517 26.702 L 18.513 26.682 L 18.509 26.653 L 18.507 26.616 L 18.506 26.577 L 18.507 26.551 L 18.509 26.508 L 18.509 26.483 L 18.506 26.458 L 18.500 26.430 L 18.493 26.397 L 18.485 26.373 L 18.476 26.348 L 18.465 26.325 L 18.454 26.304 L 18.440 26.278 L 18.427 26.258 L 18.410 26.237 L 18.395 26.219 L 18.378 26.202 L 18.360 26.185 L 18.343 26.173 L 18.319 26.158 L 18.230 26.107 L 18.111 26.041 L 17.965 25.966 L 17.814 25.879 L 17.756 25.847 L 17.718 25.827 L 17.672 25.806 L 17.644 25.795 L 17.607 25.781 L 17.582 25.773 L 17.552 25.765 L 17.523 25.761 L 17.487 25.756 L 17.451 25.754 L 17.416 25.753 L 17.327 25.753 L 17.232 25.751 L 17.077 25.748 L 17.004 25.750 L 16.899 25.749 L 16.785 25.747 L 16.741 25.751 L 16.713 25.755 L 16.687 25.760 L 16.663 25.766 L 16.632 25.776 L 16.590 25.790 L 16.546 25.806 L 16.495 25.826 L 16.439 25.852 L 16.376 25.884 L 16.217 25.973 L 16.063 26.059 L 15.991 26.098 L 15.960 26.117 L 15.913 26.146 L 15.875 26.172 L 15.837 26.199 L 15.799 26.228 L 15.752 26.266 L 15.700 26.311 L 15.653 26.356 L 15.596 26.413 L 15.415 26.605 L 15.331 26.696 L 15.187 26.855 L 14.993 27.070 L 14.960 27.107 L 14.650 27.452 L 14.553 27.563 L 14.494 27.624 L 14.406 27.716 L 14.328 27.791 L 14.263 27.852 L 14.060 28.034 L 14.013 28.077 L 13.998 28.090 L 13.779 28.285 L 13.743 28.320 L 13.714 28.351 L 13.686 28.380 L 13.649 28.422 L 13.619 28.460 L 13.591 28.497 L 13.562 28.543 L 13.531 28.593 L 13.513 28.627 L 13.481 28.689 L 13.445 28.770 L 13.410 28.855 L 13.375 28.934 L 13.349 28.981 L 13.327 29.020 L 13.303 29.054 L 13.278 29.087 L 13.245 29.126 L 13.192 29.182 L 12.974 29.408 L 12.935 29.451 L 12.922 29.466 L 12.892 29.503 L 12.863 29.545 L 12.821 29.606 L 12.788 29.659 L 12.756 29.714 L 12.732 29.761 L 12.704 29.813 L 12.666 29.893 L 12.495 30.286 L 12.363 30.570 L 12.345 30.610 L 12.317 30.658 L 12.252 30.760 L 12.204 30.825 L 12.164 30.874 L 12.127 30.913 L 12.036 31.002 L 11.943 31.091 L 11.933 31.100 L 11.958 31.133 L 11.977 31.141 L 11.992 31.143 L 12.007 31.141 L 12.026 31.138 L 12.043 31.130 L 12.065 31.119 L 12.082 31.112 L 12.103 31.107 L 12.125 31.104 L 12.148 31.104 L 12.199 31.105 L 12.253 31.109 L 12.353 31.117 L 12.480 31.130 L 12.586 31.140 L 12.633 31.144 L 12.643 31.144 L 12.688 31.145 L 12.726 31.142 L 12.760 31.138 L 12.805 31.129 L 12.872 31.109 L 12.903 31.099 L 12.905 31.098 L 12.917 31.094 L 13.035 31.050 L 13.158 31.011 L 13.175 31.003 L 13.191 30.989 L 13.207 30.973 L 13.218 30.960 L 13.223 30.953 L 13.227 30.945 L 13.230 30.938 L 13.231 30.930 L 13.231 30.925 L 13.229 30.918 L 13.224 30.911 L 13.215 30.902" fill="none"/>
+      <path class="l-location__route" data-route="2" d="M 37.045 80.233 L 37.029 80.279 L 36.939 80.541 L 37.029 81.059 L 37.029 81.081 L 37.024 81.107 L 36.992 81.093 L 36.917 81.065 L 36.839 81.036 L 36.742 80.997 L 36.625 80.946 L 36.150 80.718 L 36.110 80.700 L 36.090 80.696 L 36.069 80.692 L 36.041 80.690 L 35.832 80.680 L 35.795 80.677 L 35.777 80.673 L 35.760 80.664 L 35.743 80.652 L 35.727 80.635 L 35.712 80.618 L 35.563 80.438 L 35.416 80.245 L 35.294 80.084 L 35.165 79.899 L 35.068 79.758 L 35.053 79.736 L 34.944 79.579 L 34.887 79.498 L 34.859 79.439 L 34.821 79.403 L 34.805 79.394 L 35.413 78.433 L 35.538 78.235 L 35.861 77.731 L 35.930 77.630 L 35.999 77.538 L 36.085 77.436 L 36.188 77.325 L 36.253 77.262 L 36.365 77.167 L 37.102 76.567 L 37.121 76.551 L 37.604 76.163 L 37.675 76.108 L 37.727 76.070 L 37.776 76.038 L 37.833 76.005 L 37.888 75.979 L 37.941 75.955 L 38.021 75.924 L 38.110 75.895 L 38.331 75.835 L 38.569 75.774 L 39.029 75.659 L 39.340 75.582 L 39.444 75.557 L 39.676 75.497 L 39.815 75.458 L 39.899 75.431 L 39.960 75.407 L 40.067 75.361 L 40.163 75.312 L 40.242 75.269 L 40.305 75.228 L 40.383 75.176 L 40.475 75.107 L 40.616 74.986 L 41.154 74.514 L 41.480 74.228 L 41.800 73.944 L 42.098 73.685 L 42.395 73.426 L 42.707 73.154 L 42.840 73.042 L 42.983 72.931 L 43.748 72.343 L 44.317 71.902 L 44.604 71.682 L 44.886 71.466 L 45.114 71.292 L 45.243 71.199 L 45.325 71.147 L 45.407 71.101 L 45.453 71.078 L 45.506 71.054 L 45.557 71.032 L 45.609 71.012 L 45.656 70.996 L 45.707 70.981 L 45.764 70.966 L 45.821 70.954 L 45.876 70.944 L 45.932 70.936 L 45.985 70.931 L 46.043 70.926 L 46.140 70.923 L 46.251 70.921 L 46.468 70.920 L 46.550 70.919 L 46.623 70.913 L 46.684 70.904 L 46.749 70.888 L 46.835 70.863 L 46.916 70.834 L 47.172 70.728 L 47.299 70.676 L 47.362 70.658 L 47.470 70.619 L 47.496 70.608 L 47.538 70.590 L 47.589 70.564 L 47.620 70.546 L 47.694 70.503 L 47.735 70.477 L 47.788 70.441 L 47.863 70.384 L 47.921 70.340 L 47.975 70.301 L 48.004 70.283 L 48.011 70.289 L 48.020 70.293 L 48.030 70.294 L 48.040 70.292 L 48.049 70.288 L 48.056 70.280 L 48.061 70.273 L 48.063 70.264 L 48.097 70.202 L 48.134 70.140 L 48.488 69.805 L 48.652 69.639 L 48.721 69.553 L 48.842 69.377 L 48.986 69.136 L 49.008 69.095 L 49.041 69.028 L 49.134 68.854 L 49.176 68.776 L 49.221 68.699 L 49.268 68.624 L 49.318 68.552 L 49.366 68.485 L 49.414 68.422 L 49.457 68.368 L 49.504 68.314 L 49.605 68.207 L 49.805 67.995 L 50.130 67.657 L 50.205 67.576 L 50.302 67.466 L 50.388 67.367 L 50.539 67.160 L 50.695 66.944 L 50.798 66.782 L 50.925 66.581 L 51.036 66.424 L 51.262 66.105 L 51.381 65.940 L 51.448 65.848 L 51.512 65.768 L 51.540 65.737 L 51.595 65.672 L 51.646 65.621 L 51.744 65.522 L 51.856 65.425 L 51.924 65.371 L 52.013 65.308 L 52.237 65.157 L 52.346 65.081 L 52.430 65.015 L 52.443 65.005 L 52.528 64.925 L 52.590 64.856 L 52.638 64.792 L 52.669 64.745 L 52.702 64.687 L 52.728 64.628 L 52.758 64.556 L 52.861 64.271 L 52.887 64.213 L 52.909 64.171 L 52.936 64.127 L 52.957 64.097 L 52.974 64.070 L 53.002 64.038 L 53.038 64.000 L 53.354 63.679 L 53.401 63.636 L 53.450 63.594 L 53.485 63.565 L 53.524 63.537 L 53.569 63.508 L 53.607 63.485 L 53.641 63.467 L 53.679 63.449 L 53.710 63.436 L 53.738 63.426 L 53.788 63.411 L 53.832 63.399 L 53.880 63.388 L 53.906 63.383 L 53.936 63.377 L 54.020 63.358 L 54.078 63.344 L 54.129 63.327 L 54.171 63.312 L 54.218 63.294 L 54.268 63.271 L 54.308 63.251 L 54.347 63.226 L 54.388 63.197 L 54.451 63.150 L 54.600 63.037 L 54.635 63.011 L 54.670 62.989 L 54.677 62.984 L 54.725 62.956 L 54.771 62.929 L 54.836 62.895 L 54.904 62.864 L 54.966 62.840 L 55.036 62.815 L 55.269 62.740 L 55.665 62.619 L 55.728 62.601 L 55.769 62.592 L 55.811 62.584 L 55.855 62.578 L 55.913 62.573 L 56.130 62.558 L 56.213 62.550 L 56.279 62.542 L 56.425 62.519 L 56.882 62.448 L 57.131 62.410 L 57.346 62.383 L 57.442 62.369 L 57.501 62.359 L 57.552 62.348 L 57.614 62.335 L 57.777 62.297 L 58.012 62.241 L 58.479 62.130 L 58.543 62.114 L 58.578 62.103 L 58.622 62.087 L 58.669 62.067 L 58.706 62.049 L 58.752 62.024 L 58.793 61.997 L 58.832 61.970 L 58.869 61.938 L 58.915 61.898 L 58.972 61.844 L 59.012 61.806 L 59.041 61.782 L 59.073 61.756 L 59.102 61.735 L 59.134 61.714 L 59.171 61.692 L 59.233 61.655 L 59.380 61.576 L 59.649 61.423 L 60.358 61.029 L 60.396 61.008 L 60.468 60.969 L 60.527 60.937 L 60.572 60.915 L 60.617 60.896 L 60.677 60.873 L 60.722 60.857 L 60.773 60.843 L 60.830 60.829 L 60.885 60.819 L 60.939 60.810 L 60.989 60.806 L 61.056 60.803 L 61.126 60.805 L 61.166 60.807 L 61.316 60.814 L 61.375 60.817 L 61.421 60.817 L 61.476 60.815 L 61.516 60.810 L 61.569 60.801 L 61.628 60.787 L 61.687 60.767 L 61.711 60.759 L 61.791 60.733 L 61.838 60.719 L 61.885 60.707 L 61.933 60.699 L 61.984 60.692 L 62.038 60.685 L 62.071 60.680 L 62.152 60.663 L 62.190 60.652 L 62.231 60.637 L 62.270 60.621 L 62.306 60.604 L 62.358 60.574 L 62.413 60.537 L 62.772 60.243 L 63.125 59.951 L 63.282 59.828 L 63.360 59.770 L 63.423 59.725 L 63.506 59.674 L 63.719 59.549 L 63.800 59.498 L 63.847 59.466 L 63.879 59.441 L 63.940 59.391 L 64.017 59.318 L 64.840 58.466 L 64.885 58.416 L 64.918 58.377 L 64.953 58.332 L 65.027 58.229 L 65.110 58.102 L 65.456 57.528 L 65.558 57.359 L 65.705 57.124 L 65.777 57.005 L 65.845 56.893 L 65.884 56.819 L 65.919 56.742 L 65.952 56.663 L 65.993 56.562 L 66.029 56.483 L 66.050 56.443 L 66.079 56.399 L 66.130 56.332 L 66.205 56.248 L 66.799 55.597 L 66.843 55.556 L 66.886 55.521 L 66.931 55.489 L 66.972 55.464 L 67.069 55.409 L 67.240 55.319 L 67.279 55.296 L 67.312 55.274 L 67.355 55.241 L 67.396 55.205 L 67.435 55.166 L 67.473 55.122 L 67.520 55.069 L 67.581 55.000 L 67.658 54.913 L 67.712 54.852 L 67.743 54.815 L 67.851 54.693 L 67.918 54.613 L 67.958 54.562 L 67.986 54.522 L 68.010 54.480 L 68.030 54.442 L 68.052 54.390 L 68.078 54.310 L 68.093 54.256 L 68.103 54.198 L 68.110 54.129 L 68.110 54.061 L 68.107 54.011 L 68.101 53.968 L 68.087 53.884 L 68.074 53.812 L 68.067 53.750 L 68.065 53.692 L 68.067 53.618 L 68.076 53.541 L 68.091 53.457 L 68.106 53.400 L 68.126 53.337 L 68.146 53.287 L 68.167 53.243 L 68.189 53.199 L 68.214 53.156 L 68.256 53.097 L 68.288 53.055 L 68.351 52.987 L 68.398 52.944 L 68.445 52.905 L 68.488 52.874 L 68.540 52.844 L 68.588 52.815 L 68.650 52.785 L 68.711 52.762 L 68.771 52.740 L 68.926 52.683 L 69.005 52.653 L 69.054 52.630 L 69.095 52.609 L 69.140 52.580 L 69.214 52.526 L 69.276 52.473 L 69.307 52.442 L 69.349 52.392 L 69.404 52.319 L 69.951 51.526 L 70.023 51.421 L 70.060 51.371 L 70.096 51.331 L 70.209 51.209 L 70.533 50.875 L 71.308 50.064 L 71.569 49.797 L 71.745 49.610 L 71.927 49.420 L 71.967 49.382 L 72.010 49.344 L 72.075 49.295 L 72.462 49.015 L 72.741 48.816 L 72.816 48.764 L 72.850 48.742 L 72.897 48.716 L 73.007 48.665 L 73.364 48.517 L 73.608 48.415 L 73.851 48.317 L 73.929 48.284 L 73.979 48.263 L 74.018 48.247 L 74.064 48.231 L 74.110 48.218 L 74.149 48.208 L 74.202 48.199 L 74.268 48.191 L 74.336 48.187 L 74.379 48.187 L 74.481 48.188 L 74.718 48.200 L 74.880 48.207 L 75.298 48.228 L 75.815 48.247 L 76.179 48.261 L 76.259 48.262 L 76.316 48.260 L 76.376 48.256 L 76.446 48.248 L 76.496 48.239 L 76.640 48.210 L 76.749 48.186 L 76.903 48.156 L 76.956 48.142 L 76.999 48.132 L 77.042 48.117 L 77.093 48.100 L 77.129 48.089 L 77.178 48.071 L 77.220 48.053 L 77.256 48.035 L 77.300 48.011 L 77.330 47.993 L 77.362 47.971 L 77.394 47.948 L 77.415 47.932 L 77.421 47.928 L 77.428 47.925 L 77.439 47.922 L 77.450 47.920 L 77.458 47.922 L 77.466 47.922 L 77.478 47.919 L 77.488 47.913 L 77.495 47.903 L 77.499 47.892 L 77.500 47.884 L 77.503 47.871 L 77.507 47.861 L 77.515 47.849 L 77.528 47.831 L 77.553 47.798 L 77.726 47.649 L 77.926 47.478 L 78.212 47.232 L 78.260 47.193 L 78.266 47.188 L 78.273 47.184 L 78.282 47.182 L 78.291 47.181 L 78.298 47.183 L 78.304 47.183 L 78.315 47.181 L 78.325 47.176 L 78.332 47.167 L 78.336 47.157 L 78.337 47.150 L 78.355 47.125 L 78.371 47.106 L 78.387 47.089 L 78.397 47.079 L 78.410 47.065 L 78.467 47.018 L 78.599 46.909 L 78.791 46.739 L 78.817 46.723 L 78.834 46.709 L 78.837 46.706 L 78.850 46.694 L 78.863 46.678 L 78.870 46.669 L 79.214 46.371 L 79.251 46.336 L 79.327 46.265 L 79.397 46.195 L 79.482 46.107 L 79.679 45.895 L 79.720 45.854 L 79.757 45.821 L 79.787 45.797 L 79.821 45.773 L 79.863 45.749 L 79.901 45.728 L 79.944 45.710 L 79.995 45.692 L 80.048 45.677 L 80.648 45.505 L 80.861 45.445 L 80.927 45.424 L 80.978 45.406 L 81.021 45.387 L 81.100 45.349 L 81.322 45.239 L 81.442 45.180 L 81.507 45.144 L 81.541 45.122 L 81.577 45.099 L 81.607 45.075 L 81.640 45.049 L 81.679 45.013 L 81.715 44.976 L 81.760 44.925 L 81.821 44.846 L 81.990 44.627 L 82.176 44.385 L 82.514 43.952 L 82.618 43.803 L 82.711 43.655 L 82.773 43.540 L 83.061 42.997 L 83.249 42.649 L 83.688 41.831 L 83.858 41.519 L 84.156 41.023 L 84.511 40.439 L 84.595 40.298 L 84.638 40.229 L 84.704 40.136 L 84.742 40.089 L 84.781 40.047 L 84.871 39.969 L 85.049 39.834 L 85.230 39.702 L 85.368 39.604 L 85.493 39.521 L 85.591 39.462 L 85.706 39.400 L 86.010 39.246 L 86.337 39.084 L 86.419 39.041 L 86.475 39.010 L 86.523 38.979 L 86.575 38.943 L 86.624 38.905 L 86.674 38.862 L 86.737 38.800 L 87.031 38.489 L 87.339 38.168 L 87.876 37.605 L 87.925 37.552 L 87.974 37.491 L 88.018 37.422 L 88.055 37.366 L 88.091 37.295 L 88.124 37.229 L 88.168 37.129 L 88.190 37.061 L 88.209 36.991 L 88.322 36.376 L 88.517 35.307 L 88.549 35.136 L 88.591 34.906 L 88.605 34.827 L 88.617 34.761 L 88.637 34.677 L 88.658 34.606 L 88.687 34.521 L 88.716 34.446 L 88.741 34.383 L 88.779 34.304 L 88.925 34.022 L 89.393 33.114 L 89.566 32.777 L 89.733 32.449 L 89.769 32.363 L 89.790 32.308 L 89.805 32.254 L 89.821 32.193 L 89.833 32.142 L 89.844 32.084 L 89.853 32.022 L 89.858 31.973 L 89.861 31.902 L 89.861 31.840 L 89.859 31.786 L 89.853 31.724 L 89.843 31.648 L 89.829 31.576 L 89.814 31.510 L 89.799 31.458 L 89.780 31.402 L 89.733 31.275 L 89.701 31.201 L 89.666 31.126 L 89.635 31.064 L 89.599 31.002 L 89.563 30.944 L 89.523 30.886 L 89.480 30.827 L 89.415 30.747 L 89.374 30.699 L 88.551 29.819 L 87.948 29.179 L 87.595 28.800 L 87.468 28.659 L 87.356 28.516 L 87.293 28.423 L 86.610 27.309 L 86.472 27.085 L 86.465 27.071 L 86.542 27.028 L 86.574 27.010 L 86.611 26.987 L 86.663 26.949 L 86.706 26.916 L 86.761 26.862 L 86.826 26.789 L 86.949 26.653 L 87.034 26.553 L 87.086 26.488 L 87.131 26.427 L 87.184 26.350 L 87.225 26.287 L 87.275 26.192 L 87.327 26.087 L 87.607 25.489 L 87.999 24.623 L 88.057 24.471 L 88.075 24.421 L 88.280 23.696 L 88.505 22.853 L 88.757 21.939 L 88.980 21.126 L 88.993 21.088 L 89.073 20.855 L 89.099 20.792 L 89.129 20.731 L 89.160 20.675 L 89.204 20.607 L 89.247 20.553 L 89.298 20.491 L 89.355 20.431 L 89.385 20.401 L 89.424 20.364 L 89.457 20.335 L 89.496 20.304 L 89.533 20.278 L 89.591 20.237 L 89.650 20.201 L 89.842 20.096 L 90.434 19.776 L 90.527 19.726 L 90.783 19.589 L 90.981 19.482 L 90.989 19.477 L 91.064 19.435 L 91.330 19.290 L 91.402 19.250 L 91.484 19.206 L 91.588 19.149 L 91.662 19.105 L 91.754 19.051" fill="none"/>
+      <path class="l-location__route" data-route="3" d="M 37.045 80.233 L 37.029 80.279 L 36.939 80.541 L 37.029 81.059 L 37.029 81.081 L 37.024 81.107 L 36.992 81.093 L 36.917 81.065 L 36.839 81.036 L 36.742 80.997 L 36.625 80.946 L 36.150 80.718 L 36.110 80.700 L 36.090 80.696 L 36.069 80.692 L 36.041 80.690 L 35.832 80.680 L 35.795 80.677 L 35.777 80.673 L 35.760 80.664 L 35.743 80.652 L 35.727 80.635 L 35.712 80.618 L 35.563 80.438 L 35.416 80.245 L 35.294 80.084 L 35.165 79.899 L 35.068 79.758 L 35.053 79.736 L 34.944 79.579 L 34.887 79.498 L 34.859 79.439 L 34.821 79.403 L 34.805 79.394 L 35.413 78.433 L 35.538 78.235 L 35.861 77.731 L 35.930 77.630 L 35.999 77.538 L 36.085 77.436 L 36.188 77.325 L 36.253 77.262 L 36.365 77.167 L 37.102 76.567 L 37.121 76.551 L 37.604 76.163 L 37.675 76.108 L 37.727 76.070 L 37.776 76.038 L 37.833 76.005 L 37.888 75.979 L 37.941 75.955 L 38.021 75.924 L 38.110 75.895 L 38.331 75.835 L 38.569 75.774 L 39.029 75.659 L 39.340 75.582 L 39.444 75.557 L 39.676 75.497 L 39.815 75.458 L 39.899 75.431 L 39.960 75.407 L 40.067 75.361 L 40.163 75.312 L 40.242 75.269 L 40.305 75.228 L 40.383 75.176 L 40.475 75.107 L 40.616 74.986 L 41.154 74.514 L 41.480 74.228 L 41.800 73.944 L 42.098 73.685 L 42.395 73.426 L 42.707 73.154 L 42.840 73.042 L 42.983 72.931 L 43.748 72.343 L 44.317 71.902 L 44.604 71.682 L 44.886 71.466 L 45.114 71.292 L 45.243 71.199 L 45.325 71.147 L 45.407 71.101 L 45.453 71.078 L 45.506 71.054 L 45.557 71.032 L 45.609 71.012 L 45.656 70.996 L 45.707 70.981 L 45.764 70.966 L 45.821 70.954 L 45.876 70.944 L 45.932 70.936 L 45.985 70.931 L 46.043 70.926 L 46.140 70.923 L 46.251 70.921 L 46.468 70.920 L 46.550 70.919 L 46.623 70.913 L 46.684 70.904 L 46.749 70.888 L 46.835 70.863 L 46.916 70.834 L 47.172 70.728 L 47.299 70.676 L 47.362 70.658 L 47.470 70.619 L 47.496 70.608 L 47.538 70.590 L 47.589 70.564 L 47.620 70.546 L 47.694 70.503 L 47.735 70.477 L 47.788 70.441 L 47.863 70.384 L 47.921 70.340 L 47.975 70.301 L 48.004 70.283 L 48.011 70.289 L 48.020 70.293 L 48.030 70.294 L 48.040 70.292 L 48.049 70.288 L 48.056 70.280 L 48.061 70.273 L 48.063 70.264 L 48.097 70.202 L 48.134 70.140 L 48.488 69.805 L 48.652 69.639 L 48.721 69.553 L 48.842 69.377 L 48.986 69.136 L 49.008 69.095 L 49.041 69.028 L 49.134 68.854 L 49.176 68.776 L 49.221 68.699 L 49.268 68.624 L 49.318 68.552 L 49.366 68.485 L 49.414 68.422 L 49.457 68.368 L 49.504 68.314 L 49.605 68.207 L 49.805 67.995 L 50.130 67.657 L 50.205 67.576 L 50.302 67.466 L 50.388 67.367 L 50.539 67.160 L 50.695 66.944 L 50.798 66.782 L 50.925 66.581 L 51.036 66.424 L 51.262 66.105 L 51.381 65.940 L 51.448 65.848 L 51.512 65.768 L 51.540 65.737 L 51.595 65.672 L 51.646 65.621 L 51.744 65.522 L 51.856 65.425 L 51.924 65.371 L 52.013 65.308 L 52.237 65.157 L 52.346 65.081 L 52.430 65.015 L 52.443 65.005 L 52.528 64.925 L 52.590 64.856 L 52.638 64.792 L 52.669 64.745 L 52.702 64.687 L 52.728 64.628 L 52.758 64.556 L 52.861 64.271 L 52.887 64.213 L 52.909 64.171 L 52.936 64.127 L 52.957 64.097 L 52.974 64.070 L 53.002 64.038 L 53.038 64.000 L 53.354 63.679 L 53.401 63.636 L 53.450 63.594 L 53.485 63.565 L 53.524 63.537 L 53.569 63.508 L 53.607 63.485 L 53.641 63.467 L 53.679 63.449 L 53.710 63.436 L 53.738 63.426 L 53.788 63.411 L 53.832 63.399 L 53.880 63.388 L 53.906 63.383 L 53.936 63.377 L 54.020 63.358 L 54.078 63.344 L 54.129 63.327 L 54.171 63.312 L 54.218 63.294 L 54.268 63.271 L 54.308 63.251 L 54.347 63.226 L 54.388 63.197 L 54.451 63.150 L 54.600 63.037 L 54.635 63.011 L 54.670 62.989 L 54.677 62.984 L 54.725 62.956 L 54.771 62.929 L 54.836 62.895 L 54.904 62.864 L 54.966 62.840 L 55.036 62.815 L 55.269 62.740 L 55.665 62.619 L 55.728 62.601 L 55.769 62.592 L 55.811 62.584 L 55.855 62.578 L 55.913 62.573 L 56.130 62.558 L 56.213 62.550 L 56.279 62.542 L 56.425 62.519 L 56.882 62.448 L 57.131 62.410 L 57.346 62.383 L 57.442 62.369 L 57.501 62.359 L 57.552 62.348 L 57.614 62.335 L 57.777 62.297 L 58.012 62.241 L 58.479 62.130 L 58.543 62.114 L 58.578 62.103 L 58.622 62.087 L 58.669 62.067 L 58.706 62.049 L 58.752 62.024 L 58.793 61.997 L 58.832 61.970 L 58.869 61.938 L 58.915 61.898 L 58.972 61.844 L 59.012 61.806 L 59.041 61.782 L 59.073 61.756 L 59.102 61.735 L 59.134 61.714 L 59.171 61.692 L 59.233 61.655 L 59.380 61.576 L 59.649 61.423 L 60.358 61.029 L 60.396 61.008 L 60.468 60.969 L 60.527 60.937 L 60.572 60.915 L 60.617 60.896 L 60.677 60.873 L 60.722 60.857 L 60.773 60.843 L 60.830 60.829 L 60.885 60.819 L 60.939 60.810 L 60.989 60.806 L 61.056 60.803 L 61.126 60.805 L 61.166 60.807 L 61.316 60.814 L 61.375 60.817 L 61.421 60.817 L 61.476 60.815 L 61.516 60.810 L 61.569 60.801 L 61.628 60.787 L 61.687 60.767 L 61.711 60.759 L 61.791 60.733 L 61.838 60.719 L 61.885 60.707 L 61.933 60.699 L 61.984 60.692 L 62.038 60.685 L 62.071 60.680 L 62.152 60.663 L 62.190 60.652 L 62.231 60.637 L 62.270 60.621 L 62.306 60.604 L 62.358 60.574 L 62.413 60.537 L 62.772 60.243 L 63.125 59.951 L 63.282 59.828 L 63.360 59.770 L 63.423 59.725 L 63.506 59.674 L 63.719 59.549 L 63.800 59.498 L 63.847 59.466 L 63.879 59.441 L 63.940 59.391 L 64.017 59.318 L 64.840 58.466 L 64.885 58.416 L 64.918 58.377 L 64.953 58.332 L 65.027 58.229 L 65.110 58.102 L 65.456 57.528 L 65.558 57.359 L 65.705 57.124 L 65.777 57.005 L 65.845 56.893 L 65.884 56.819 L 65.919 56.742 L 65.952 56.663 L 65.993 56.562 L 66.029 56.483 L 66.050 56.443 L 66.079 56.399 L 66.130 56.332 L 66.205 56.248 L 66.799 55.597 L 66.843 55.556 L 66.886 55.521 L 66.931 55.489 L 66.972 55.464 L 67.069 55.409 L 67.240 55.319 L 67.279 55.296 L 67.312 55.274 L 67.355 55.241 L 67.396 55.205 L 67.435 55.166 L 67.473 55.122 L 67.520 55.069 L 67.581 55.000 L 67.658 54.913 L 67.712 54.852 L 67.743 54.815 L 67.851 54.693 L 67.918 54.613 L 67.958 54.562 L 67.986 54.522 L 68.010 54.480 L 68.030 54.442 L 68.052 54.390 L 68.078 54.310 L 68.093 54.256 L 68.103 54.198 L 68.110 54.129 L 68.110 54.061 L 68.107 54.011 L 68.101 53.968 L 68.087 53.884 L 68.074 53.812 L 68.067 53.750 L 68.065 53.692 L 68.067 53.618 L 68.076 53.541 L 68.091 53.457 L 68.106 53.400 L 68.126 53.337 L 68.146 53.287 L 68.167 53.243 L 68.189 53.199 L 68.214 53.156 L 68.256 53.097 L 68.288 53.055 L 68.351 52.987 L 68.398 52.944 L 68.445 52.905 L 68.488 52.874 L 68.540 52.844 L 68.588 52.815 L 68.650 52.785 L 68.711 52.762 L 68.771 52.740 L 68.926 52.683 L 69.005 52.653 L 69.054 52.630 L 69.095 52.609 L 69.140 52.580 L 69.214 52.526 L 69.276 52.473 L 69.307 52.442 L 69.349 52.392 L 69.404 52.319 L 69.951 51.526 L 70.023 51.421 L 70.060 51.371 L 70.096 51.331 L 70.209 51.209 L 70.533 50.875 L 71.308 50.064 L 71.569 49.797 L 71.745 49.610 L 71.927 49.420 L 71.967 49.382 L 72.010 49.344 L 72.075 49.295 L 72.462 49.015 L 72.741 48.816 L 72.816 48.764 L 72.850 48.742 L 72.897 48.716 L 73.007 48.665 L 73.364 48.517 L 73.608 48.415 L 73.851 48.317 L 73.929 48.284 L 73.979 48.263 L 74.018 48.247 L 74.064 48.231 L 74.110 48.218 L 74.149 48.208 L 74.202 48.199 L 74.268 48.191 L 74.336 48.187 L 74.379 48.187 L 74.481 48.188 L 74.718 48.200 L 74.880 48.207 L 75.298 48.228 L 75.815 48.247 L 76.179 48.261 L 76.259 48.262 L 76.316 48.260 L 76.376 48.256 L 76.446 48.248 L 76.496 48.239 L 76.640 48.210 L 76.749 48.186 L 76.903 48.156 L 76.956 48.142 L 76.999 48.132 L 77.042 48.117 L 77.093 48.100 L 77.129 48.089 L 77.178 48.071 L 77.220 48.053 L 77.256 48.035 L 77.300 48.011 L 77.330 47.993 L 77.362 47.971 L 77.394 47.948 L 77.415 47.932 L 77.421 47.928 L 77.428 47.925 L 77.439 47.922 L 77.450 47.920 L 77.458 47.922 L 77.466 47.922 L 77.478 47.919 L 77.488 47.913 L 77.495 47.903 L 77.499 47.892 L 77.500 47.884 L 77.503 47.871 L 77.507 47.861 L 77.515 47.849 L 77.528 47.831 L 77.553 47.798 L 77.726 47.649 L 77.926 47.478 L 78.212 47.232 L 78.260 47.193 L 78.266 47.188 L 78.273 47.184 L 78.282 47.182 L 78.291 47.181 L 78.298 47.183 L 78.304 47.183 L 78.315 47.181 L 78.325 47.176 L 78.332 47.167 L 78.336 47.157 L 78.337 47.150 L 78.355 47.125 L 78.371 47.106 L 78.387 47.089 L 78.397 47.079 L 78.410 47.065 L 78.467 47.018 L 78.599 46.909 L 78.791 46.739 L 78.817 46.723 L 78.834 46.709 L 78.837 46.706 L 78.850 46.694 L 78.863 46.678 L 78.870 46.669 L 79.214 46.371 L 79.251 46.336 L 79.327 46.265 L 79.397 46.195 L 79.482 46.107 L 79.679 45.895 L 79.720 45.854 L 79.757 45.821 L 79.787 45.797 L 79.821 45.773 L 79.863 45.749 L 79.901 45.728 L 79.944 45.710 L 79.995 45.692 L 80.048 45.677 L 80.648 45.505 L 80.861 45.445 L 80.927 45.424 L 80.978 45.406 L 81.021 45.387 L 81.100 45.349 L 81.322 45.239 L 81.442 45.180 L 81.507 45.144 L 81.541 45.122 L 81.577 45.099 L 81.607 45.075 L 81.640 45.049 L 81.679 45.013 L 81.715 44.976 L 81.760 44.925 L 81.821 44.846 L 81.990 44.627 L 82.176 44.385 L 82.514 43.952 L 82.618 43.803 L 82.711 43.655 L 82.773 43.540 L 83.061 42.997 L 83.249 42.649 L 83.688 41.831 L 83.858 41.519 L 84.156 41.023 L 84.511 40.439 L 84.595 40.298 L 84.638 40.229 L 84.704 40.136 L 84.742 40.089 L 84.781 40.047 L 84.871 39.969 L 85.049 39.834 L 85.230 39.702 L 85.368 39.604 L 85.493 39.521 L 85.591 39.462 L 85.706 39.400 L 86.010 39.246 L 86.337 39.084 L 86.419 39.041 L 86.475 39.010 L 86.523 38.979 L 86.575 38.943 L 86.624 38.905 L 86.674 38.862 L 86.737 38.800 L 87.031 38.489 L 87.339 38.168 L 87.876 37.605 L 87.925 37.552 L 87.974 37.491 L 88.018 37.422 L 88.055 37.366 L 88.091 37.295 L 88.124 37.229 L 88.168 37.129 L 88.190 37.061 L 88.209 36.991 L 88.322 36.376 L 88.435 36.400 L 88.474 36.409 L 88.506 36.410 L 88.540 36.402 L 88.569 36.388 L 88.581 36.380 L 88.595 36.364 L 88.612 36.343 L 88.632 36.318 L 88.638 36.311 L 88.658 36.283 L 88.685 36.242 L 88.702 36.211 L 88.711 36.190 L 88.721 36.184 L 88.731 36.182 L 88.793 36.173 L 88.909 36.142 L 88.941 36.135 L 88.956 36.125 L 89.000 36.070 L 89.085 35.944 L 89.169 35.840 L 89.208 35.757 L 89.247 35.648 L 89.295 35.491 L 89.338 35.366 L 89.483 35.077 L 89.609 34.839 L 89.747 34.601 L 89.908 34.369 L 90.091 34.119 L 90.174 34.015 L 90.316 33.881 L 90.518 33.701 L 90.621 33.611 L 90.797 33.447 L 90.908 33.355 L 91.147 33.147 L 91.424 32.898 L 91.686 32.672 L 91.741 32.624 L 92.470 31.981 L 92.876 31.621 L 93.169 31.367 L 93.228 31.314 L 93.321 31.215 L 93.386 31.117 L 93.434 31.015 L 93.470 30.897 L 93.539 30.607 L 93.615 30.262 L 93.670 30.017 L 93.720 29.795 L 93.754 29.673 L 93.801 29.561 L 93.864 29.452 L 93.952 29.334 L 94.183 29.098 L 94.417 28.860 L 94.607 28.677 L 94.821 28.505 L 94.927 28.422 L 95.120 28.267 L 95.220 28.189 L 95.278 28.147 L 95.341 28.109 L 95.381 28.082 L 95.422 28.048 L 95.457 28.012 L 95.527 27.933 L 95.588 27.825 L 95.704 27.589 L 95.755 27.480 L 95.829 27.373 L 95.899 27.299 L 95.988 27.225 L 96.082 27.165 L 96.107 27.150 L 96.183 27.117 L 96.241 27.099 L 96.293 27.087 L 96.416 27.059 L 96.651 27.004 L 96.769 26.977 L 96.933 26.940 L 97.111 26.899 L 97.239 26.874 L 97.471 26.819 L 97.723 26.762 L 98.021 26.695 L 98.147 26.664 L 98.348 26.620 L 98.498 26.587 L 98.562 26.577 L 98.611 26.570 L 98.661 26.569 L 98.721 26.574 L 98.794 26.584 L 98.864 26.586 L 98.864 26.571 L 98.864 26.493 L 98.867 26.451 L 98.870 26.419 L 98.876 26.379 L 98.880 26.352 L 98.886 26.328 L 98.902 26.264 L 98.918 26.199 L 98.937 26.116 L 98.951 26.042 L 98.961 25.960 L 98.964 25.915 L 98.967 25.855 L 98.968 25.800 L 98.961 25.516 L 98.953 25.124 L 98.952 25.110 L 98.951 25.053 L 98.951 25.004 L 98.953 24.940 L 98.958 24.890 L 98.964 24.850 L 98.982 24.768 L 99.012 24.651 L 99.018 24.612 L 99.030 24.525 L 99.031 24.495 L 99.028 24.464 L 99.023 24.423 L 99.011 24.346 L 99.002 24.305 L 98.991 24.263 L 98.981 24.231 L 98.965 24.193 L 98.943 24.151 L 98.915 24.107 L 98.732 23.866 L 98.600 23.680 L 98.406 23.418 L 98.222 23.171 L 98.160 23.079 L 98.109 22.988 L 98.072 22.910 L 98.059 22.879 L 97.993 22.691 L 97.966 22.605 L 97.914 22.444 L 97.889 22.379 L 97.862 22.320 L 97.809 22.215 L 97.752 22.125 L 97.693 22.045 L 97.508 21.822 L 97.474 21.774 L 97.441 21.723 L 97.411 21.663 L 97.391 21.615 L 97.374 21.563 L 97.358 21.505 L 97.346 21.440 L 97.339 21.396 L 97.335 21.345 L 97.332 21.282 L 97.333 21.158 L 97.369 20.442 L 97.379 20.366 L 97.392 20.306 L 97.415 20.234 L 97.443 20.164 L 97.482 20.093 L 97.506 20.055 L 97.531 20.024 L 97.567 19.980 L 97.604 19.939 L 97.628 19.916 L 97.803 19.769 L 98.091 19.514 L 98.173 19.443 L 98.206 19.410 L 98.232 19.373 L 98.261 19.309 L 98.274 19.275 L 98.285 19.235 L 98.309 19.113 L 98.511 19.149 L 98.927 19.226 L 99.011 19.240 L 99.273 19.284 L 99.302 19.289 L 100.151 19.432 L 100.298 19.458 L 100.996 19.581 L 101.568 19.682 L 101.732 19.711 L 101.900 19.745 L 102.132 19.796 L 102.376 19.853 L 102.610 19.908 L 102.941 19.976 L 103.029 19.992 L 103.101 20.002 L 103.169 20.010 L 103.246 20.013 L 103.389 20.015 L 103.772 20.012 L 104.048 20.010 L 104.122 20.006 L 104.212 19.996 L 104.288 19.983 L 104.346 19.970 L 104.394 19.956 L 104.446 19.937 L 104.505 19.909 L 104.584 19.864 L 104.636 19.828 L 104.691 19.779 L 104.732 19.738 L 104.761 19.704 L 104.798 19.664 L 104.943 19.485 L 105.042 19.366 L 105.331 19.012 L 105.826 18.412 L 105.956 18.254 L 106.030 18.168 L 106.100 18.080 L 106.306 17.822 L 106.322 17.801 L 106.335 17.784 L 106.354 17.763 L 106.373 17.743 L 106.396 17.723 L 106.417 17.705 L 106.445 17.684 L 106.470 17.666 L 106.501 17.647 L 106.538 17.627 L 106.601 17.594 L 106.698 17.545 L 106.900 17.442 L 106.983 17.396 L 107.027 17.370 L 107.070 17.343 L 107.101 17.318 L 107.119 17.302 L 107.144 17.280 L 107.167 17.257 L 107.190 17.230 L 107.217 17.197 L 107.247 17.154 L 107.281 17.101 L 107.314 17.056 L 107.343 17.021 L 107.370 16.987 L 107.396 16.959 L 107.424 16.931 L 107.533 16.832 L 107.544 16.820 L 107.553 16.807 L 107.567 16.785 L 107.578 16.765 L 107.590 16.740 L 107.597 16.717 L 107.601 16.686 L 107.603 16.658 L 107.603 16.625 L 107.601 16.591 L 107.600 16.553 L 107.598 16.483 L 107.600 16.383 L 107.606 16.318 L 107.615 16.255 L 107.629 16.185 L 107.649 16.124 L 107.709 15.987 L 107.747 15.906 L 107.803 15.805 L 107.946 15.556 L 108.108 15.264 L 108.262 14.990 L 108.310 14.907" fill="none"/>
+      </svg><!--MAP-ROUTES:end-->
+      <!--MAP-HOME:start--><span class="l-location__home" style="left:31.657%;top:80.194%"><i></i><span class="text-small">Kerbyggð</span></span><!--MAP-HOME:end-->
+      <div class="l-location__labels" aria-hidden="true">
+        <span style="left:26%;top:88%" class="l-location__landmark">Selfoss</span>
+        <span style="left:9%;top:64%" class="l-location__landmark">Hveragerði</span>
+      </div>
+      <!--MAP-PINS:start--><ul class="l-location__pins js-location-pins" id="pins" data-parallax-pattern="landingLocationMapPinDesktop" data-parallax-measure=".section">
+        <li class="l-location__pin is-active" style="left:31.226%;top:77.573%" data-pin="0"><i></i><span class="text-small">Kerið</span></li>
+        <li class="l-location__pin" style="left:11.340%;top:30.888%" data-pin="1"><i></i><span class="text-small">Þingvellir</span></li>
+        <li class="l-location__pin" style="left:78.599%;top:18.957%" data-pin="2"><i></i><span class="text-small">Geysir</span></li>
+        <li class="l-location__pin" style="left:93.430%;top:15.304%" data-pin="3"><i></i><span class="text-small">Gullfoss</span></li>
+      </ul><!--MAP-PINS:end-->
+    </div>
+  </div>
+        <div class="l-location__dim" data-parallax-pattern="landingLocationMapTitleDesktop" data-parallax-measure=".section"></div>
+        <h2 class="l-location__title" data-reveal-group data-parallax-pattern="landingLocationMapTitleDesktop" data-parallax-measure=".section">
+          <span class="text-subtitle" data-reveal="subtitle">Five minutes</span>
+          <span class="h0" data-reveal="title">TO THE CRATER</span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="l-location__card-layer">
+      <div class="sticky sticky--full-height l-location__card-sticky" style="--location-count:4" id="location-cards">
+        <div class="sticky__layer sticky__layer--sticky l-location__card-pin">
+          <article class="l-location-card card js-location-card">
+            <div class="l-location-card__top">
+              <!--MAP-LABELS:start--><div class="l-location-card__labels js-loc-labels">
+                <p class="text-small is-active">Kerið<br><span>3.4 km · 5 min by car</span></p>
+                <p class="text-small">Þingvellir<br><span>44 km · 46 min by car</span></p>
+                <p class="text-small">Geysir<br><span>49.8 km · 45 min by car</span></p>
+                <p class="text-small">Gullfoss<br><span>57.8 km · 54 min by car</span></p>
+              </div><!--MAP-LABELS:end-->
+              <span class="text-small l-location-card__count"><b id="loc-counter">1</b> of 4</span>
+            </div>
+            <div class="l-location-card__logo"><svg viewBox="0 0 300 62" aria-hidden="true"><use href="#wm-ridge-s"/></svg></div>
+            <!--MAP-TEXTS:start--><div class="l-location-card__texts js-loc-texts">
+              <p class="is-active">The crater the place is named for. A red rim around still water, and the walk round the top takes twenty minutes.</p>
+              <p>Where the parliament met from 930, in the rift between two continents. A national park and a world heritage site.</p>
+              <p>Strokkur goes up every few minutes, and the whole field steams in the cold. The word geyser comes from this valley.</p>
+              <p>The Hvítá drops thirty two metres into the canyon in two steps. Loud, and worth the wet coat.</p>
+            </div><!--MAP-TEXTS:end-->
+            <div class="l-location-card__line"><i></i><i></i><i></i><span class="l-location-card__progress js-loc-progress" data-parallax-pattern="landingLocationMapProgress" data-parallax-measure=".sticky"></span></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile cards -->
+  <!--MAP-MOBILE:start--><ul class="l-location__mobile mobile-scrollable js-mobile-scrollable" aria-hidden="false">
+    <li class="l-location__mcard"><p class="text-small">Kerið<br><span>3.4 km · 5 min</span></p><p>The crater the place is named for. A red rim around still water, and the walk round the top takes twenty minutes.</p></li>
+    <li class="l-location__mcard"><p class="text-small">Þingvellir<br><span>44 km · 46 min</span></p><p>Where the parliament met from 930, in the rift between two continents. A national park and a world heritage site.</p></li>
+    <li class="l-location__mcard"><p class="text-small">Geysir<br><span>49.8 km · 45 min</span></p><p>Strokkur goes up every few minutes, and the whole field steams in the cold. The word geyser comes from this valley.</p></li>
+    <li class="l-location__mcard"><p class="text-small">Gullfoss<br><span>57.8 km · 54 min</span></p><p>The Hvítá drops thirty two metres into the canyon in two steps. Loud, and worth the wet coat.</p></li>
+  </ul><!--MAP-MOBILE:end-->
+</section>
+
+<!-- 10 ── THE IDEA / Inga and Ísak ────────────────────────── -->
+<section class="section section--no-overflow-clip ui-light l-journey" id="the-idea" data-hold data-themed="ui-light" data-reveal-root
+         data-gravity-well='[{"viewport":0,"element":0},{"viewport":100,"element":100}]'>
+  <div class="l-journey__bg appear" data-parallax-pattern="landingJourneyBackgroundDesktop" data-parallax-measure=".section">
+    <img data-img="paint-ridge" data-w="720 1440 1920" sizes="100vw" alt="">
+  </div>
+  <div class="row l-journey__top">
+    <div class="col col--md-5 col--md-offset-1 l-journey__quote" data-reveal-group>
+      <p class="h1 text-color-primary" data-reveal="title">AN ARCHITECT DREW THEM. HER HUSBAND AND THEIR SONS BUILT THEM. THE SAME FAMILY STILL HANDS OVER THE KEYS</p>
+      <p class="text-small" data-reveal="text">Inga and Ísak<br><span>The family that built Kerbyggð</span></p>
+    </div>
+    <figure class="col col--md-5 col--md-offset-1 parallax-image-move appear l-journey__portrait" data-parallax-pattern="imageMove">
+      <img data-img="paint-house-day" data-w="720 1440 1920" sizes="42vw" alt="Watercolour of a Kerbyggð house on the moss">
+    </figure>
+  </div>
+
+  <div class="l-quotes js-quotes" id="quotes" style="--quote-count:3">
+    <div class="l-quotes__sticky js-cursor-target-container">
+      <p class="text-small l-quotes__label">What guests wrote</p>
+      <div class="l-quotes__items js-quote-items">
+        <p class="h3 text-center is-active">“ANYONE WHO LOVES MODERN HOME DESIGN WILL LOVE STAYING IN THESE CABINS. CLOSE TO TOWN, BUT YOU STILL FEEL LIKE YOU ARE OFF IN A WORLD OF YOUR OWN.” CHRISTOPHER, UNITED STATES</p>
+        <p class="h3 text-center">“BOTH EXTERIOR AND INTERIOR OF THE HOUSE WAS MODERN AND POSH. EVERYTHING WAS BRAND NEW AND WELL PLANNED.” LISA, HONG KONG</p>
+        <p class="h3 text-center">“THE COTTAGE WAS NICELY DECORATED AND EXTREMELY CLEAN AND COMFORTABLE. THE PERFECT PLACE TO RELAX BETWEEN BUSY SIGHTSEEING.” BRENT, UNITED STATES</p>
+      </div>
+      <p class="text-small l-quotes__name">Kerbyggð<br><span>Kerbyggð 1, 801 Grímsnes- og Grafningshreppur</span></p>
+      <div class="l-quotes__progress" aria-hidden="true"><span></span></div>
+    </div>
+    <div class="cursor cursor--progress" id="cursor" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="59" fill="none" stroke="rgba(24,32,31,.2)" stroke-width="1"/><circle class="cursor__bar" cx="60" cy="60" r="59" fill="none" stroke="#18201F" stroke-width="1" stroke-dasharray="370.7" stroke-dashoffset="247"/></svg><span class="cursor__count text-small"><b id="cursor-counter">1</b> of 3</span></div>
+  </div>
+</section>
+
+<!-- 11 ── CONTACT / book direct ──────────────────────────── -->
+<section class="section register-section ui-light" id="contact" data-themed="ui-light" data-reveal-root>
+  <div class="register sticky sticky--full-height sticky--under-previous sticky--under-next">
+    <div class="register__spacer"></div>
+    <div class="sticky__layer sticky__layer--sticky register__bg-layer">
+      <figure class="register__bg parallax-image-zoom appear" data-parallax-pattern="registerBgMove registerBgScale" data-parallax-measure=".section">
+        <img data-img="living-view" data-w="720 1024" sizes="100vw" alt="The living room and its corner windows onto the heath">
+      </figure>
+    </div>
+    <div class="sticky__layer sticky__layer--top register__screen" data-parallax-pattern="registerScreen" data-parallax-measure=".section">
+      <div class="row">
+        <div class="col col--md-5 col--md-offset-1 register__form-col">
+          <div class="register__form ui-light ui-background" data-reveal-group>
+            <svg class="register__logo" viewBox="0 0 300 62" aria-hidden="true"><use href="#wm-ridge-s"/></svg>
+            <p class="register__title"><span class="text-subtitle" data-reveal="subtitle">Book</span><span class="h2" data-reveal="title">DIRECT</span></p>
+            <p class="register__text" data-reveal="text">A bottle of sparkling wine on arrival, and ten percent off any stay over four days. Kerbyggð 1, 801 Grímsnes. +354 782 5400.</p>
+            <div class="register__actions" data-reveal="fade-in slow">
+              <a class="btn btn--primary" data-booking href="https://property.godo.is/book-kerbyggd" target="_blank" rel="noopener">Check the dates</a>
+              <a class="btn btn--underline" href="mailto:kerhotel@kerhotel.is"><span class="btn__underline">kerhotel@kerhotel.is</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ── FOOTER ───────────────────────────────────────────── -->
+<footer class="section section--no-overflow ui-dark footer" id="footer" data-themed="ui-dark" data-reveal-root data-gravity-well='[{"viewport":100,"element":100}]'>
+  <div class="footer__top js-hide-header">
+    <nav class="footer__menu">
+      <a class="btn btn--underline text-small" href="#locations"><span class="btn__underline">Map</span></a>
+      <a class="btn btn--underline text-small" href="https://kerbyggd.is" target="_blank" rel="noopener"><span class="btn__underline">kerbyggd.is</span></a>
+    </nav>
+  </div>
+  <div class="footer__headline js-mask-text">
+    <p class="h1 footer__text">FOUR HOUSES.<br>NINETY-THREE SQUARE<br>METRES EACH.<br>ONE FAMILY.<br>FIVE MINUTES<br>FROM THE CRATER.</p>
+    <p class="h1 footer__text footer__text--mask" aria-hidden="true">FOUR HOUSES.<br>NINETY-THREE SQUARE<br>METRES EACH.<br>ONE FAMILY.<br>FIVE MINUTES<br>FROM THE CRATER.</p>
+  </div>
+  <div class="footer__bottom row">
+    <div class="col col--md-2 col--md-offset-1">
+      <a class="btn btn--gradient btn--arrow-up" href="#top" aria-label="Back to top"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="g-ring-2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A443E"/><stop offset="1" stop-color="#7C8A80"/></linearGradient></defs><circle class="btn__ring" cx="20" cy="20" r="19.35" fill="none" stroke="url(#g-ring-2)" stroke-width="1.3"/></svg><span class="btn__arrow" aria-hidden="true"></span></a>
+    </div>
+    <p class="col col--md-5 text-small footer__copy">© 2026 Kerbyggð. Kerbyggð 1, 801 Grímsnes- og Grafningshreppur. +354 782 5400<span class="footer__attrib">Basemap Esri Dark Gray Canvas. Routes and drive times measured with OSRM over OpenStreetMap.</span></p>
+    <p class="col col--md-3 footer__credit"><a class="sndr" href="https://sndr-studio.pages.dev" target="_blank" rel="noopener" aria-label="Hannað af SNDR Studio" data-logotype><span class="sndr__mark">SN<i>✦</i>DR</span><span class="sndr__studio">STUDIO</span></a></p>
+  </div>
+</footer>
+
+</main>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
