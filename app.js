@@ -983,7 +983,62 @@ const map = (() => {
      ignored by Chrome once a stroke is non-scaling, which turned the draw-on
      into a permanently dashed line. */
   const lens = routes.map(r => { const L = r.getTotalLength(); r.style.strokeDasharray = L; r.style.strokeDashoffset = L; return L; });
-  let last = -1, panX = 0, panY = 0, tx = 0, ty = 0, mobScale = 1, shownScale = 1;
+  /* ONE framing function for both breakpoints, computed from the sheet.
+     What was here before: the outer map took Holt's `landingLocationMapDesktop`
+     keyframes (translate(-21.7%,-53%) scale(3.05) and so on) and the phone took
+     four `!important` pans in CSS. Every one of those numbers was a pan for
+     Holt's 5x4 sheet and Holt's pins. On this sheet the last stop pushed the map
+     clean out of frame: a sliver of coast at the top and a dark screen under
+     the card. Now each stop measures the active route's own box, picks a scale
+     that fits it into the free part of the screen, and translates so its centre
+     lands there. The intro keeps the flight: tight on the house, then out. */
+  const mapEl = $('.js-location-map');
+  const card = $('.l-location-card');
+  let last = -1;
+  let cur = { x: 0, y: 0, s: 1.9 }, want = { x: 0, y: 0, s: 1.9 };
+  const vbOf = r => r.ownerSVGElement.viewBox.baseVal;
+  const routeBox = i => {                                    // in % of the sheet
+    const r = routes[i]; if (!r) return null;
+    try { const b = r.getBBox(), vb = vbOf(r);
+      return { x0: b.x / vb.width * 100, x1: (b.x + b.width) / vb.width * 100, y0: b.y / vb.height * 100, y1: (b.y + b.height) / vb.height * 100 };
+    } catch (e) { return null; }
+  };
+  /* Everything in the CONTAINER's coordinates, never the viewport's. The map's
+     base transform centres it in .l-location__map-pin; on desktop that box is
+     the pinned viewport, on a phone it is a 125svh block in normal flow, so a
+     target written in viewport terms was off by the scroll on every phone. */
+  const pinBox = () => mapPin ? { w: mapPin.clientWidth, h: mapPin.clientHeight } : { w: VW, h: VH };
+  const frameFor = (box, targetX, targetY, freeW, freeH, sMax, sMin) => {
+    const Wm = mapEl.offsetWidth, Hm = mapEl.offsetHeight, pb = pinBox();
+    const cx = (box.x0 + box.x1) / 2, cy = (box.y0 + box.y1) / 2;
+    const bw = Math.max(1, (box.x1 - box.x0) / 100 * Wm), bh = Math.max(1, (box.y1 - box.y0) / 100 * Hm);
+    let s = Math.min(sMax, freeW * .80 / bw, freeH * .72 / bh);
+    s = Math.max(sMin, s);
+    /* No coverage floor and no translate clamp. Gullfoss sits near the sheet's
+       right edge, and framing it in the free two thirds of the screen while
+       also keeping map under the card is not satisfiable at any margin. The
+       container carries the sheet's own ground and the sheet's edges are
+       vignetted instead, so the map reads as a chart laid on the page and the
+       framing is free to put the route where the reader can see it. */
+    const ox = (cx / 100 - .5) * Wm, oy = (cy / 100 - .5) * Hm;      // offset from the sheet's centre
+    return { x: targetX - pb.w / 2 - s * ox, y: targetY - pb.h / 2 - s * oy, s };
+  };
+  const frameStop = i => {
+    const box = routeBox(i) || { x0: HOME.x - 2, x1: HOME.x + 2, y0: HOME.y - 2, y1: HOME.y + 2 };
+    const pad = 2.5; box.x0 -= pad; box.x1 += pad; box.y0 -= pad; box.y1 += pad;
+    const pb = pinBox();
+    if (mdUp()) {
+      const cardW = card ? card.offsetWidth + 2 * (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--spacing')) || 20) : pb.w * .38;
+      const freeW = pb.w - cardW;
+      return frameFor(box, freeW / 2, pb.h * .5, freeW, pb.h, 2.4, .5);
+    }
+    // the visible band on a phone is the top ~70% of the block (the rail sits under it)
+    return frameFor(box, pb.w / 2, pb.h * .36, pb.w, pb.h * .62, 2.2, .5);
+  };
+  const frameIntro = () => {                                 // tight on the house, the title over it
+    const b = { x0: HOME.x - 6, x1: HOME.x + 6, y0: HOME.y - 6, y1: HOME.y + 6 }, pb = pinBox();
+    return mdUp() ? frameFor(b, pb.w * .62, pb.h * .52, pb.w, pb.h, 2.1, 1) : frameFor(b, pb.w / 2, pb.h * .40, pb.w, pb.h, 1.7, 1);
+  };
   const setIndex = i => {
     if (i === last) return; last = i;
     pins.forEach((p, k) => p.classList.toggle('is-active', k === i));
@@ -991,57 +1046,32 @@ const map = (() => {
     texts.forEach((p, k) => p.classList.toggle('is-active', k === i));
     routes.forEach((r, k) => { const on = k === i; r.classList.toggle('is-drawn', on); r.style.strokeDashoffset = on ? 0 : lens[k]; });
     if (counter) counter.textContent = i + 1;
-    // pan so the whole walk (hotel → destination) sits in frame; the outer map is
-    // already scaled by the parallax flight, so damp the shift or it overshoots
-    const pin = pins[i];
-    if (pin) {
-      const dx = parseFloat(pin.style.left), dy = parseFloat(pin.style.top);
-      if (mdUp()) {
-        // the outer map is already scaled 1.4x by the flight, so damp the shift
-        tx = (50 - (HOME.x + dx) / 2) * .55;
-        ty = (50 - (HOME.y + dy) / 2) * .55;
-      } else {
-        /* On a phone the sheet is 2.5x the viewport width and nothing scales it,
-           so the desktop damping left the destination off the edge: you saw the
-           house and the first bend and not where the road went. Fit the whole
-           route instead: centre on its box, undamped, and scale the inner down
-           until the box sits inside the screen with room to spare. */
-        const r = routes[i]; let cx = (HOME.x + dx) / 2, cy = (HOME.y + dy) / 2, sc = 1;
-        try {
-          const bb = r.getBBox(); const vb = r.ownerSVGElement.viewBox.baseVal;
-          const x0 = bb.x / vb.width * 100, x1 = (bb.x + bb.width) / vb.width * 100;
-          const y0 = bb.y / vb.height * 100, y1 = (bb.y + bb.height) / vb.height * 100;
-          cx = (x0 + x1) / 2; cy = (y0 + y1) / 2;
-          const box = inner.getBoundingClientRect();
-          const needW = (x1 - x0) / 100 * box.width, needH = (y1 - y0) / 100 * box.height;
-          sc = Math.min(1, (innerWidth * .78) / Math.max(needW, 1), (innerHeight * .62) / Math.max(needH, 1));
-          sc = Math.max(sc, .38);
-        } catch (e) {}
-        tx = 50 - cx; ty = 50 - cy; mobScale = sc;
-      }
-    }
+    want = frameStop(i);
   };
+  const cardSticky0 = $('.l-location__card-sticky');
+  let introMode = true;
   const tick = y => {
     if (section && !sheetStarted) { const t = docTop(section); if (y > t - VH * 2.5 && y < t + section.offsetHeight) loadSheet(); }
-    // desktop only: on touch the horizontal card swipe is the source of truth, and
-    // driving the index from the (hidden, desktop) progress line every frame stamped
-    // straight over it, so the route never followed the swipe
-    if (prog && mdUp()) setIndex(Math.min(pins.length - 1, Math.floor(parseFloat(prog.dataset.progress || '0') * pins.length)));
-    if (inner) {
-      panX = lerp(panX, tx, .06); panY = lerp(panY, ty, .06);
-      shownScale = lerp(shownScale, mdUp() ? 1 : mobScale, .08);
-      // translate in % of the inner's own box, then scale about the centre so
-      // the fitted route stays where the translate put it
-      inner.style.transform = mdUp()
-        ? `translate(${panX.toFixed(3)}%, ${panY.toFixed(3)}%)`
-        : `translate(${panX.toFixed(3)}%, ${panY.toFixed(3)}%) scale(${shownScale.toFixed(4)})`;
+    if (mdUp()) {
+      // the intro lasts until the card sticky is about to pin, then the stops take over
+      const intro = cardSticky0 ? y < docTop(cardSticky0) - VH * .35 : false;
+      if (intro !== introMode) { introMode = intro; if (intro) want = frameIntro(); else if (last >= 0) want = frameStop(last); }
+      if (prog) { const i = Math.min(pins.length - 1, Math.floor(parseFloat(prog.dataset.progress || '0') * pins.length)); if (intro) { if (last !== i) setIndex(i), want = frameIntro(); } else setIndex(i); }
     }
+    if (mapEl) {
+      cur.x = lerp(cur.x, want.x, .06); cur.y = lerp(cur.y, want.y, .06); cur.s = lerp(cur.s, want.s, .06);
+      mapEl.style.transform = `translate(-50%,-50%) translate(${cur.x.toFixed(1)}px,${cur.y.toFixed(1)}px) scale(${cur.s.toFixed(4)})`;
+    }
+    if (inner) inner.style.transform = '';
   };
+  // first frame: on the house, before anything has scrolled
+  want = frameIntro(); cur = { ...want };
+  window.addEventListener('resize', () => { want = introMode && mdUp() ? frameIntro() : frameStop(Math.max(0, last)); });
   /* Arrows. The index is a pure function of scroll on desktop, so a button that
      only set it would be overwritten on the next frame; instead it scrolls to
      the y where that stop becomes active. On touch the horizontal card rail is
      the source of truth, so the same buttons page that rail. */
-  const cardSticky = $('.l-location__card-sticky');
+  const cardSticky = cardSticky0;
   const goTo = i => {
     i = Math.max(0, Math.min(pins.length - 1, i));
     if (mdUp()) {
@@ -1055,12 +1085,12 @@ const map = (() => {
   };
   $$('.js-loc-prev').forEach(b => b.addEventListener('click', () => goTo(last - 1)));
   $$('.js-loc-next').forEach(b => b.addEventListener('click', () => goTo(last + 1)));
+  if (!mdUp()) setIndex(0);                                   // the rail only speaks on scroll; frame the first stop now
   if (mobile) {
     const cards = $$('.l-location__mcard', mobile);
     mobile.addEventListener('scroll', () => {
       const i = Math.round(mobile.scrollLeft / (mobile.scrollWidth - mobile.clientWidth || 1) * (cards.length - 1));
       setIndex(i);
-      mapPin.className = mapPin.className.replace(/\bis-slide-\d\b/g, '').trim() + (i ? ` is-slide-${i}` : '');
     }, { passive: true });
     setIndex(0);
   }

@@ -675,14 +675,14 @@ html.no-scroll-smooth .l-tenets{clip-path:inset(0 0 -100svh)}
 .l-location__grid{display:grid;grid-template-areas:"loc";}
 .l-location__map-layer,.l-location__card-layer{grid-area:loc}
 .l-location__map-layer{height:calc(100svh * var(--location-count,4) + 50svh + 200svh)}
-.l-location__map-pin{height:100svh;overflow:hidden;background:#0F1514}
+.l-location__map-pin{height:100svh;overflow:hidden;background:#535E56}
 /* The box MUST carry the sheet's own aspect. The reference's sheet was 5x4 tiles
    and its CSS said so; this sheet is 7x6 (1792x1536 = 1.1667). Left at 5/4 the
    image was cropped by object-fit, the route SVG was stretched to a different
    aspect than the image it sat on, and the pins, positioned in % of the box,
    landed on a box the geography no longer filled. Routes drew invisibly thin in
    the wrong place and the whole chapter read as broken. One number, both places. */
-.l-location__map{position:absolute;left:50%;top:50%;width:max(100vw,calc(100svh*1.16667));aspect-ratio:1792/1536;transform:translate(-50%,-50%);transform-origin:50% 50%;will-change:transform}
+.l-location__map{--map-w:2560;--map-h:2048;position:absolute;left:50%;top:50%;width:max(100vw,calc(100svh * var(--map-w) / var(--map-h)));aspect-ratio:var(--map-w) / var(--map-h);transform:translate(-50%,-50%);transform-origin:50% 50%;will-change:transform}
 .l-location__map-inner{position:absolute;inset:0;will-change:transform;transition:none}
 .l-location__map-img{position:absolute;inset:0;background:#0d0d0d;width:100%;height:100%;object-fit:cover;filter:brightness(.85) contrast(1.05)}
 /* real walking routes, drawn when their card becomes active */
@@ -737,10 +737,6 @@ html.no-scroll-smooth .l-tenets{clip-path:inset(0 0 -100svh)}
   .l-location__grid{display:block}
   .l-location__map-layer{height:auto}
   .l-location__map-pin{position:relative;height:125svh;overflow:hidden}
-  .l-location__map{transform:translate(-50%,-50%) scale(1.4)!important;transition:transform var(--d-slow) var(--ease-house)}
-  .l-location__map-pin.is-slide-1 .l-location__map{transform:translate(-56%,-45%) scale(1.6)!important}
-  .l-location__map-pin.is-slide-2 .l-location__map{transform:translate(-60%,-60%) scale(1.6)!important}
-  .l-location__map-pin.is-slide-3 .l-location__map{transform:translate(-52%,-20%) scale(1.6)!important}
   .l-location__pins{opacity:1!important}
   .l-location__dim{opacity:.4!important}
   .l-location__title{opacity:1!important;align-items:flex-start;justify-content:flex-start;padding:calc(var(--spacing)*5) var(--spacing) 0;text-align:left}
@@ -1203,7 +1199,7 @@ p, .text-small, .l-room-facts dd, figcaption{text-wrap:pretty}
    the screen and let the card have the right. */
 @media (min-width:768px){
   .l-location__card-sticky{height:calc(72svh * var(--location-count,4) + 40svh)}
-  .l-location__map-layer{height:calc(72svh * var(--location-count,4) + 40svh + 80svh)}
+  .l-location__map-layer{height:calc(72svh * var(--location-count,4) + 40svh + 200svh)}  /* the card sticky starts 200svh into the layer; anything shorter unpins the map before the last stops */
   .l-location__title{right:auto;width:min(58vw,760px);align-items:flex-start;text-align:left;
     padding-left:var(--spacing);padding-right:0}
   .l-location__title .h0{font-size:6.4rem;line-height:1.02}
@@ -1268,9 +1264,6 @@ p, .text-small, .l-room-facts dd, figcaption{text-wrap:pretty}
   .l-location__mcount{color:var(--t-small);text-align:center;flex:1}
   .l-location-card__step{width:44px;height:44px}
 }
-/* the phone-side fit scales the inner about its centre, so the translate that
-   centred the route is not undone by the scale */
-@media (max-width:767px){ .l-location__map-inner{transform-origin:50% 50%} }
 
 /* ============================================================
    THE STAY PICKER
@@ -1353,3 +1346,8 @@ p, .text-small, .l-room-facts dd, figcaption{text-wrap:pretty}
 @media (min-width:1440px) and (min-height:900px){ .menu__title.h1{font-size:4rem} }
 @media (max-width:767px){ .menu__title.h1{font-size:2.8rem} .menu__list{gap:calc(var(--spacing)*.4)} }
 .menu__label{font-size:1rem}
+
+/* The sheet dissolves into the container's ground at its edges (the ground is
+   sampled from the sheet's own corners), so a frame that pans the sheet off
+   one side shows a soft horizon rather than a hard edge and a dark hole. */
+.l-location__map{-webkit-mask-image:radial-gradient(ellipse 62% 62% at 50% 50%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 62% 62% at 50% 50%,#000 58%,transparent 100%)}
