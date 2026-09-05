@@ -741,7 +741,7 @@ html.no-scroll-smooth .l-tenets{clip-path:inset(0 0 -100svh)}
   .l-location__dim{opacity:.4!important}
   .l-location__title{opacity:1!important;align-items:flex-start;justify-content:flex-start;padding:calc(var(--spacing)*5) var(--spacing) 0;text-align:left}
   .l-location__card-layer{display:none}
-  .l-location__mobile{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:var(--spacing);margin-top:-30svh;position:relative;z-index:1;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .l-location__mobile{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:var(--spacing);margin-top:0;position:relative;z-index:1;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .l-location__mobile::-webkit-scrollbar{display:none}
   .l-location__mcard{flex:0 0 74vw;scroll-snap-align:center;min-height:0;background:#18201F;color:#F4EBDC;padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px}
   .l-location__mcard .text-small{color:#F4EBDC}
@@ -1260,7 +1260,11 @@ p, .text-small, .l-room-facts dd, figcaption{text-wrap:pretty}
 .l-location-card__step:focus-visible{box-shadow:0 0 0 2px var(--t-text)}
 .l-location__mnav{display:none}
 @media (max-width:767px){
-  .l-location__mnav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:var(--spacing) var(--spacing) 0}
+  /* The arrows lead the overlay band: pulled up over the map with the rail
+     following in flow. Placed after the rail they fell 24px past the section's
+     end (the rail's negative margin shrinks the section), where the section's
+     clip hid them and the journey chapter took the clicks. */
+  .l-location__mnav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:var(--spacing) var(--spacing) 0;position:relative;z-index:2;margin-top:-30svh}
   .l-location__mcount{color:var(--t-small);text-align:center;flex:1}
   .l-location-card__step{width:44px;height:44px}
 }

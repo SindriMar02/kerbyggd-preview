@@ -1087,6 +1087,16 @@ const map = (() => {
   $$('.js-loc-prev').forEach(b => b.addEventListener('click', () => goTo(last - 1)));
   $$('.js-loc-next').forEach(b => b.addEventListener('click', () => goTo(last + 1)));
   if (!mdUp()) setIndex(0);                                   // the rail only speaks on scroll; frame the first stop now
+  /* A narrow desktop window (the app's side pane, a half-screen browser) gets
+     the mobile layout with a mouse: the rail has no scrollbar and a wheel does
+     nothing sideways, so the stops were unreachable except by the arrows. A
+     wheel over the rail steps it, and hands the page back once it hits an end. */
+  if (mobile) mobile.addEventListener('wheel', e => {
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    const max = mobile.scrollWidth - mobile.clientWidth, at = mobile.scrollLeft;
+    if ((e.deltaY > 0 && at >= max - 1) || (e.deltaY < 0 && at <= 1)) return;
+    e.preventDefault(); mobile.scrollLeft = at + e.deltaY;
+  }, { passive: false });
   if (mobile) {
     const cards = $$('.l-location__mcard', mobile);
     mobile.addEventListener('scroll', () => {
