@@ -55,10 +55,9 @@ try{ if(sessionStorage.getItem('kerb-preloaded')) document.documentElement.class
     </div>
     <a class="header__logo" href="#top" aria-label="Kerbyggð, back to top">
       <span class="header__logo-text">
+        <svg class="header__logo-ridge" viewBox="0 0 300 62" aria-hidden="true"><use href="#wm-ridge"/></svg>
         <svg class="header__logo-word" viewBox="0 0 985.14 100" aria-hidden="true"><use href="#wm-word"/></svg>
-        <span class="header__logo-sub">Golden Circle</span>
       </span>
-      <svg class="header__logo-mark" viewBox="0 0 300 62" aria-hidden="true"><use href="#wm-ridge-s"/></svg>
     </a>
     <div class="header__right">
       <a class="btn btn--underline header__map" href="#locations"><span class="btn__underline">Map</span></a>
@@ -496,7 +495,11 @@ try{ if(sessionStorage.getItem('kerb-preloaded')) document.documentElement.class
                 <p class="text-small">Geysir<br><span>49.8 km · 45 min by car</span></p>
                 <p class="text-small">Gullfoss<br><span>57.8 km · 54 min by car</span></p>
               </div><!--MAP-LABELS:end-->
-              <span class="text-small l-location-card__count"><b id="loc-counter">1</b> of 4</span>
+              <div class="l-location-card__nav">
+                <button type="button" class="l-location-card__step js-loc-prev" aria-label="Previous stop"><span aria-hidden="true"></span></button>
+                <span class="text-small l-location-card__count"><b id="loc-counter">1</b> of 4</span>
+                <button type="button" class="l-location-card__step js-loc-next" aria-label="Next stop"><span aria-hidden="true"></span></button>
+              </div>
             </div>
             <div class="l-location-card__logo"><svg viewBox="0 0 300 62" aria-hidden="true"><use href="#wm-ridge-s"/></svg></div>
             <!--MAP-TEXTS:start--><div class="l-location-card__texts js-loc-texts">
@@ -513,6 +516,11 @@ try{ if(sessionStorage.getItem('kerb-preloaded')) document.documentElement.class
   </div>
 
   <!-- mobile cards -->
+  <div class="l-location__mnav" aria-hidden="false">
+    <button type="button" class="l-location-card__step js-loc-prev" aria-label="Previous stop"><span aria-hidden="true"></span></button>
+    <span class="text-small l-location__mcount">Swipe or step through the four</span>
+    <button type="button" class="l-location-card__step js-loc-next" aria-label="Next stop"><span aria-hidden="true"></span></button>
+  </div>
   <!--MAP-MOBILE:start--><ul class="l-location__mobile mobile-scrollable js-mobile-scrollable" aria-hidden="false">
     <li class="l-location__mcard"><p class="text-small">Kerið<br><span>3.4 km · 5 min</span></p><p>The crater the place is named for. A red rim around still water, and the walk round the top takes twenty minutes.</p></li>
     <li class="l-location__mcard"><p class="text-small">Þingvellir<br><span>44 km · 46 min</span></p><p>Where the parliament met from 930, in the rift between two continents. A national park and a world heritage site.</p></li>

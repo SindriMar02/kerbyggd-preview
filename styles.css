@@ -196,14 +196,13 @@ html.with-modal .header__menu-word--open{opacity:0;transform:translateY(-6px)}
 html.with-modal .header__menu-word--close{opacity:1;transform:none}
 /* The mark is drawn artwork in a sprite, so both states take their colour from
    the themed header with currentColor and no invert filter is needed. */
-.header__logo{position:relative;display:block;height:31px;width:126px;text-align:center;color:inherit}
-.header__logo-text,.header__logo-mark{position:absolute;left:50%;top:0;transform:translateX(-50%);transition:opacity var(--d-normal) var(--ease-house)}
-.header__logo-text{display:block;width:126px;color:inherit;opacity:0}
+/* ONE lockup, in both states. It used to cross-fade to a reduced ridge with no
+   wordmark once you scrolled, so the mountain changed shape halfway down the
+   page and the name vanished with it. Same drawing as the hero, at 126px. */
+.header__logo{position:relative;display:block;width:126px;color:inherit}
+.header__logo-text{display:flex;flex-direction:column;align-items:center;color:inherit}
+.header__logo-ridge{display:block;width:calc(126px*.60);height:auto;margin-bottom:calc(126px*.045)}
 .header__logo-word{display:block;width:126px;height:auto}
-.header__logo-sub{display:block;margin-top:7px;font-size:.9rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;opacity:.62;padding-left:.18em}
-.header--top .header__logo-text{opacity:1}
-.header__logo-mark{width:46px;height:auto;top:9px;opacity:1}
-.header--top .header__logo-mark{opacity:0}
 .header .btn--underline{font-size:1.3rem}
 .header .header__book{display:inline-flex}
 @media (max-width:767px){
@@ -231,7 +230,10 @@ html.with-modal-booking .header__book{opacity:0;pointer-events:none}
 .modal__bg::after{content:"";position:absolute;inset:0;background:rgba(15,21,20,.55)}
 .modal__bg::before{content:"";position:absolute;left:0;right:0;top:0;height:calc(var(--spacing)*3 + 30px);background:linear-gradient(#0F1514,transparent);z-index:1}
 .modal__img{width:100%;height:100%;object-fit:cover}
-.modal__scroller{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;clip-path:inset(100% 0 0 0);transition:clip-path var(--d-normal) var(--ease-house)}
+.modal__scroller{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;clip-path:inset(100% 0 0 0);transition:clip-path var(--d-normal) var(--ease-house);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:calc(var(--header-h) + var(--spacing)) var(--spacing) calc(var(--spacing)*2)}
+/* a list taller than the screen must start at the top, or centring hides its
+   first item above the fold with nothing to scroll back to */
+.modal__scroller:has(.menu__list){align-items:safe center}
 .modal.is-open .modal__scroller{clip-path:inset(0 0 0 0)}
 .modal.is-open .modal__bg{opacity:1}
 .modal.is-closing .modal__scroller{clip-path:inset(0 0 100% 0)}
@@ -674,12 +676,21 @@ html.no-scroll-smooth .l-tenets{clip-path:inset(0 0 -100svh)}
 .l-location__map-layer,.l-location__card-layer{grid-area:loc}
 .l-location__map-layer{height:calc(100svh * var(--location-count,4) + 50svh + 200svh)}
 .l-location__map-pin{height:100svh;overflow:hidden;background:#0F1514}
-.l-location__map{position:absolute;left:50%;top:50%;width:max(100vw,calc(100svh*1.25));aspect-ratio:5/4;transform:translate(-50%,-50%);transform-origin:50% 50%;will-change:transform}
+/* The box MUST carry the sheet's own aspect. The reference's sheet was 5x4 tiles
+   and its CSS said so; this sheet is 7x6 (1792x1536 = 1.1667). Left at 5/4 the
+   image was cropped by object-fit, the route SVG was stretched to a different
+   aspect than the image it sat on, and the pins, positioned in % of the box,
+   landed on a box the geography no longer filled. Routes drew invisibly thin in
+   the wrong place and the whole chapter read as broken. One number, both places. */
+.l-location__map{position:absolute;left:50%;top:50%;width:max(100vw,calc(100svh*1.16667));aspect-ratio:1792/1536;transform:translate(-50%,-50%);transform-origin:50% 50%;will-change:transform}
 .l-location__map-inner{position:absolute;inset:0;will-change:transform;transition:none}
 .l-location__map-img{position:absolute;inset:0;background:#0d0d0d;width:100%;height:100%;object-fit:cover;filter:brightness(.85) contrast(1.05)}
 /* real walking routes, drawn when their card becomes active */
 .l-location__routes{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.l-location__route{stroke:rgba(244,235,220,.9);stroke-width:.11;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .5s var(--ease-house),stroke-dashoffset 1.6s var(--ease-house)}
+/* stroke-width is in viewBox units (116.667 wide), so .26 lands at roughly
+   3px on a 1440 screen and stays proportional as the map scales; .11 was a
+   hairline that vanished under the dim layer */
+.l-location__route{stroke:rgba(244,235,220,.95);stroke-width:.36;stroke-linecap:round;stroke-linejoin:round;opacity:0;filter:drop-shadow(0 0 .4px rgba(244,235,220,.55));transition:opacity .5s var(--ease-house),stroke-dashoffset 1.6s var(--ease-house)}
 .l-location__route.is-drawn{opacity:1}
 .l-location__home{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:2}
 .l-location__home i{width:5px;height:5px;border-radius:50%;background:#F4EBDC;box-shadow:0 0 0 4px rgba(244,235,220,.18)}
@@ -689,7 +700,7 @@ html.no-scroll-smooth .l-tenets{clip-path:inset(0 0 -100svh)}
 .l-location__landmark--holt{color:#F4EBDC;font-size:.6rem}
 .l-location__landmark--holt i{display:block;width:3px;height:3px;background:#F4EBDC;border-radius:50%;margin:0 auto 3px}
 .l-location__pins{position:absolute;inset:0;opacity:0}
-.l-location__pin{position:absolute;transform:translate(-50%,-50%);width:13px;height:13px}
+.l-location__pin{position:absolute;transform:translate(-50%,-50%);width:18px;height:18px}
 .l-location__pin i{position:absolute;left:50%;top:50%;width:1.25px;height:1.25px;margin:-.625px 0 0 -.625px;background:#F4EBDC;border-radius:50%}
 .l-location__pin i::after{content:"";position:absolute;left:50%;top:50%;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:rgba(15,21,20,.5);border:.22px solid #F4EBDC;transform:scale(.3);transition:transform var(--d-slow) var(--ease-house)}
 .l-location__pin.is-active i::after{transform:scale(1)}
@@ -984,7 +995,8 @@ html.no-scroll-smooth .l-quotes__sticky{cursor:auto}
 .modal--booking .modal__bg{opacity:.10}
 .modal--booking .modal__bg::after{background:rgba(15,21,20,.82)}
 .bk{align-items:flex-start;justify-content:center;overflow-y:auto;padding:calc(var(--spacing)*5.5) var(--spacing) calc(var(--spacing)*3)}
-.bk__inner{position:relative;width:min(100%,760px);color:#F4EBDC}
+/* widened for the two-month picker; 760px squeezed each month into 187px */
+.bk__inner{position:relative;width:min(100%,980px);color:#F4EBDC}
 .bk__head{margin-bottom:calc(var(--spacing)*1.75)}
 .bk__eyebrow{color:var(--c-lichen);margin-bottom:calc(var(--spacing)*.75)}
 .bk__title{display:flex;flex-direction:column;margin-bottom:calc(var(--spacing)*.75)}
@@ -1239,3 +1251,105 @@ p, .text-small, .l-room-facts dd, figcaption{text-wrap:pretty}
 .l-reviews__foot{text-align:center;color:var(--t-small);margin-top:calc(var(--spacing)*3.5)}
 @media (min-width:1920px){ .l-reviews__quote p{font-size:1.8rem} }
 @media (max-width:767px){ .l-reviews__score{font-size:7.2rem} .l-reviews__quote p{font-size:1.5rem} }
+
+/* ---- map stepping ----
+   Scroll still drives the chapter; the arrows are for the reader who wants to
+   see Gullfoss now rather than in four screens. Same ring arrow the buttons
+   already use elsewhere, at the card's own scale. */
+.l-location-card__nav{display:flex;align-items:center;gap:10px}
+.l-location-card__step{width:30px;height:30px;border-radius:50%;border:1px solid var(--t-line);display:grid;place-items:center;color:inherit;cursor:pointer;transition:border-color var(--d-normal) var(--ease-house),background var(--d-normal) var(--ease-house)}
+.l-location-card__step span{width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:translateX(-1px) rotate(45deg)}
+.js-loc-prev span{transform:translateX(1px) rotate(-135deg)}
+@media (hover:hover){.l-location-card__step:hover{border-color:var(--t-text);background:rgba(244,235,220,.06)}}
+.l-location-card__step:focus-visible{box-shadow:0 0 0 2px var(--t-text)}
+.l-location__mnav{display:none}
+@media (max-width:767px){
+  .l-location__mnav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:var(--spacing) var(--spacing) 0}
+  .l-location__mcount{color:var(--t-small);text-align:center;flex:1}
+  .l-location-card__step{width:44px;height:44px}
+}
+/* the phone-side fit scales the inner about its centre, so the translate that
+   centred the route is not undone by the scale */
+@media (max-width:767px){ .l-location__map-inner{transform-origin:50% 50%} }
+
+/* ============================================================
+   THE STAY PICKER
+   Geometry per the shipped Aurora Hills picker: cells FLUSH (row-gap only) or
+   the range bar breaks into seven pieces; the bar painted on a ::before at
+   inset 2px 0; check-in keeps its left cap and drops its right, checkout the
+   reverse, middles carry none; the caps switch on data-range so a lone check-in
+   stays a full disc. Two months above 620px, one below: two 7-col grids on a
+   390px screen give 19px cells. Restyled to this build's tokens.
+   ============================================================ */
+/* A ground of its own. Without it the modal's hero photograph reads straight
+   through the calendar and the numbers sit on a picture of a house. */
+.stay{display:grid;gap:calc(var(--spacing)*1.2);margin:calc(var(--spacing)*.6) 0 var(--spacing);border:1px solid rgba(244,235,220,.18);border-radius:6px;overflow:hidden;background:rgba(11,15,14,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+@media (min-width:900px){.stay{grid-template-columns:minmax(0,1.42fr) minmax(280px,1fr);gap:0}}
+.stay__cal{padding:calc(var(--spacing)*1.1);min-width:0}
+@media (min-width:900px){.stay__cal{border-right:1px solid var(--t-line)}}
+.stay__head{display:flex;align-items:center;gap:10px;margin-bottom:calc(var(--spacing)*.8)}
+.stay__months{flex:1;margin:0;text-align:center;letter-spacing:.1em}
+.stay__m2{opacity:.5}
+@media (max-width:619px){.stay__m2{display:none}}
+.stay__arrow{width:36px;height:36px;border-radius:50%;border:1px solid var(--t-line);display:grid;place-items:center;color:inherit;cursor:pointer;transition:border-color var(--d-normal) var(--ease-house),opacity var(--d-normal) var(--ease-house)}
+.stay__arrow:disabled{opacity:.25;cursor:default}
+@media (hover:hover){.stay__arrow:not(:disabled):hover{border-color:var(--t-text)}}
+.stay__arrow:focus-visible{box-shadow:0 0 0 2px var(--t-text)}
+.stay__chev{width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor}
+.stay__chev--r{transform:translateX(-2px) rotate(45deg)}
+.stay__chev--l{transform:translateX(2px) rotate(-135deg)}
+.stay__grids{display:grid;gap:calc(var(--spacing)*1.3);min-width:0}
+@media (min-width:620px){.stay__grids{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.stay__grid{min-width:0}
+.stay__days{min-width:0}
+@media (max-width:619px){.stay__grid--2{display:none}}
+.stay__dows{display:grid;grid-template-columns:repeat(7,1fr);font-size:1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--t-small);text-align:center;padding-bottom:7px;margin-bottom:3px;border-bottom:1px solid var(--t-line)}
+.stay__days{display:grid;grid-template-columns:repeat(7,1fr);row-gap:2px}
+/* No min-height on the pointer side. Seven cells with a 34px floor need 238px,
+   and inside a two-month layout each month's track is ~187px at 1440, so the
+   row overflowed its column and October printed over the summary. The floor
+   belongs on touch, where the tap target is the constraint. */
+.stay__day{position:relative;appearance:none;background:none;border:0;font:inherit;color:var(--t-text);cursor:pointer;aspect-ratio:1/1;min-width:0;display:grid;place-items:center;font-size:1.2rem;font-variant-numeric:tabular-nums}
+@media (max-width:619px){.stay__day{min-height:40px;font-size:1.4rem}}
+.stay__day::before{content:"";position:absolute;inset:2px 0;z-index:0;transition:background .18s var(--ease-house)}
+.stay__day span{position:relative;z-index:1}
+.stay__day--out{opacity:0;pointer-events:none}
+.stay__day--past{color:var(--t-small);cursor:default}
+.stay__day--today span{text-decoration:underline;text-underline-offset:3px}
+.stay__day--mid::before{background:rgba(244,235,220,.16)}
+.ui-light .stay__day--mid::before{background:rgba(24,32,31,.12)}
+.stay__day--start::before,.stay__day--end::before{background:var(--t-text);border-radius:999px}
+.stay__day--start span,.stay__day--end span{color:var(--t-background)}
+/* caps only once there is a range to cap */
+.stay__grids[data-range] .stay__day--start::before{border-radius:999px 0 0 999px}
+.stay__grids[data-range] .stay__day--end::before{border-radius:0 999px 999px 0}
+.stay__grids[data-range] .stay__day--start.stay__day--end::before{border-radius:999px}
+@media (hover:hover){.stay__day:not(:disabled):not(.stay__day--start):not(.stay__day--end):hover::before{background:rgba(244,235,220,.10)}
+  .ui-light .stay__day:not(:disabled):not(.stay__day--start):not(.stay__day--end):hover::before{background:rgba(24,32,31,.08)}}
+.stay__day:focus-visible{outline:none}
+.stay__day:focus-visible::before{box-shadow:inset 0 0 0 1px var(--t-text)}
+.stay__read{padding:calc(var(--spacing)*1.1);display:flex;flex-direction:column;gap:calc(var(--spacing)*.9);min-width:0;background:rgba(244,235,220,.035)}
+.stay__cells{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+.stay__cell{display:grid;gap:4px;min-width:0}
+.stay__cell b{font-family:var(--font-serif);font-weight:300;font-size:1.7rem;line-height:1.15;letter-spacing:.01em;white-space:nowrap}
+.stay__arrowline{width:22px;height:1px;background:var(--t-line)}
+.stay__sum{border-top:1px solid var(--t-line);padding-top:calc(var(--spacing)*.8);min-height:64px}
+.stay__line{display:flex;justify-content:space-between;gap:12px;margin:0 0 6px;color:var(--t-primary);font-variant-numeric:tabular-nums}
+.stay__total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0}
+.stay__total b{font-family:var(--font-serif);font-weight:300;font-size:2.6rem;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.stay__empty{margin:0;color:var(--t-primary);text-wrap:pretty}
+.stay__note{margin:0;color:var(--t-text);text-wrap:pretty}
+.stay__fine{color:var(--t-small);text-transform:none;letter-spacing:.02em;font-weight:500;margin:auto 0 0;text-wrap:pretty}
+@media (max-width:619px){.stay__cell b{font-size:1.7rem}}
+
+
+/* ---- menu sizing ----
+   The chapter titles were .h1 (60px at 1310, 80px at 1920) for eight items,
+   which overran the viewport on a laptop and left the last chapters
+   unreachable. Two thirds of that fits eight items on a 700px-tall window with
+   the list still the loudest thing on screen. */
+.menu__list{display:flex;flex-direction:column;gap:calc(var(--spacing)*.22)}
+.menu__title.h1{font-size:3.2rem;line-height:1.04;margin-top:2px}
+@media (min-width:1440px) and (min-height:900px){ .menu__title.h1{font-size:4rem} }
+@media (max-width:767px){ .menu__title.h1{font-size:2.8rem} .menu__list{gap:calc(var(--spacing)*.4)} }
+.menu__label{font-size:1rem}

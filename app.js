@@ -242,7 +242,13 @@ const PATTERNS = {
       { v: -500, e: 0, p: { transform: 'translate(-50%,-50%) translate(-32.1%,-5.2%) scale(2.0)' } }], clamp: true },
   landingLocationMapTitleDesktop: { measure: 'closest:.section', keys: () => [{ v: 0, e: 0, p: { opacity: '1' }, easing: 'easeOutQuad' }, { v: -100, e: 0, p: { opacity: '0' } }], clamp: true },
   landingLocationMapPinDesktop: { measure: 'closest:.section', keys: () => [{ v: 0, e: 0, p: { opacity: '0' } }, { v: -80, e: 0, p: { opacity: '0' } }, { v: -100, e: 0, p: { opacity: '1' } }], clamp: true, onUpdate: (el, p) => el.classList.toggle('is-seen', p > .99) },
-  landingLocationMapProgress: { measure: 'closest:.sticky', keys: () => [{ v: 0, e: 0, p: { transform: 'scaleX(0)', progress: '0' } }, { v: -100, e: 0, p: { transform: 'scaleX(0.25)', progress: '0.25' } }, { v: -200, e: 0, p: { transform: 'scaleX(0.5)', progress: '0.5' } }, { v: -300, e: 0, p: { transform: 'scaleX(0.75)', progress: '0.75' } }, { v: 100, e: 100, p: { transform: 'scaleX(1)', progress: '1' } }], clamp: true },
+  /* The stops are 72svh each (see .l-location__card-sticky), so the sticky
+     travels 4*72+40-100 = 228svh and each quarter is 57svh. The reference keyed
+     this at 100svh a stop; left like that the .75 key fell AFTER the 1.0 key
+     and the third stop's window collapsed to a hundred pixels, which the 1440
+     probe stepped straight over: mapPins came back 1,2,4. Keys now sit at the
+     quarters of the real travel, so every stop gets the same scroll. */
+  landingLocationMapProgress: { measure: 'closest:.sticky', keys: () => [{ v: 0, e: 0, p: { transform: 'scaleX(0)', progress: '0' } }, { v: -57, e: 0, p: { transform: 'scaleX(0.25)', progress: '0.25' } }, { v: -114, e: 0, p: { transform: 'scaleX(0.5)', progress: '0.5' } }, { v: -171, e: 0, p: { transform: 'scaleX(0.75)', progress: '0.75' } }, { v: 100, e: 100, p: { transform: 'scaleX(1)', progress: '1' } }], clamp: true },
   landingJourneyBackgroundDesktop: { measure: 'closest:.section', keys: () => [{ v: 0, e: 0, p: { transform: 'translateY(0svh)' } }, { v: 100, e: 100, p: { transform: 'translateY(250svh)' } }], clamp: false },
   registerBgMove: { measure: 'closest:.section', target: 'img', keys: () => [{ v: 100, e: 0, p: { transform: 'translateY(0svh)' } }, { v: 0, e: 100, p: { transform: 'translateY(-40svh)' } }], clamp: true, mobile: true },
   registerBgScale: { measure: 'closest:.section', target: 'img', keys: () => [{ v: 100, e: 0, p: { transform: 'scale(1.1)' } }, { v: 0, e: 100, p: { transform: 'scale(1)' } }], clamp: true, mobile: true },
@@ -658,8 +664,12 @@ const menu = (() => {
   modal.addEventListener('mousemove', e => { mouseY = e.clientY / innerHeight; });
   const tick = () => {
     if (!open || !mdUp()) return;
+    /* Only scrub when the list fits. Once it overflows the scroller is a real
+       scroll container, and translating it as well moved the list out from
+       under the pointer while the wheel was trying to move it the other way. */
     const over = list.offsetHeight - scrollerEl.offsetHeight + 120;
-    ty = over > 0 ? -over * mouseY : 0;
+    if (over > 0) { if (cy) { cy = 0; list.style.transform = ''; } return; }
+    ty = 0;
     cy = lerp(cy, ty, .1);
     list.style.transform = `translateY(${cy.toFixed(2)}px)`;
   };
@@ -960,12 +970,20 @@ const map = (() => {
     if (sheet.complete) done(); else { sheet.addEventListener('load', done, { once: true }); sheet.addEventListener('error', done, { once: true }); }
   };
   const mobile = $('.js-mobile-scrollable'), mapPin = $('.l-location__map-pin');
-  const HOME = { x: 57.1, y: 57.6 };
+  /* Read the home point off the marker the page already carries. It was
+     hardcoded to 57.1 / 57.6, which is Hótel Holt's Bergstaðastræti on Holt's
+     sheet: every pan then centred on a point that does not exist on this map,
+     and the routes drew off-frame while the counter and card said they were
+     drawn. One number from the markup, never a constant from another build. */
+  const homeEl = $('.l-location__home');
+  const HOME = homeEl && homeEl.style.left
+    ? { x: parseFloat(homeEl.style.left), y: parseFloat(homeEl.style.top) }
+    : { x: 50, y: 50 };
   /* Dash the routes from their MEASURED length. pathLength normalisation is
      ignored by Chrome once a stroke is non-scaling, which turned the draw-on
      into a permanently dashed line. */
   const lens = routes.map(r => { const L = r.getTotalLength(); r.style.strokeDasharray = L; r.style.strokeDashoffset = L; return L; });
-  let last = -1, panX = 0, panY = 0, tx = 0, ty = 0;
+  let last = -1, panX = 0, panY = 0, tx = 0, ty = 0, mobScale = 1, shownScale = 1;
   const setIndex = i => {
     if (i === last) return; last = i;
     pins.forEach((p, k) => p.classList.toggle('is-active', k === i));
@@ -978,8 +996,29 @@ const map = (() => {
     const pin = pins[i];
     if (pin) {
       const dx = parseFloat(pin.style.left), dy = parseFloat(pin.style.top);
-      tx = (50 - (HOME.x + dx) / 2) * .55;
-      ty = (50 - (HOME.y + dy) / 2) * .55;
+      if (mdUp()) {
+        // the outer map is already scaled 1.4x by the flight, so damp the shift
+        tx = (50 - (HOME.x + dx) / 2) * .55;
+        ty = (50 - (HOME.y + dy) / 2) * .55;
+      } else {
+        /* On a phone the sheet is 2.5x the viewport width and nothing scales it,
+           so the desktop damping left the destination off the edge: you saw the
+           house and the first bend and not where the road went. Fit the whole
+           route instead: centre on its box, undamped, and scale the inner down
+           until the box sits inside the screen with room to spare. */
+        const r = routes[i]; let cx = (HOME.x + dx) / 2, cy = (HOME.y + dy) / 2, sc = 1;
+        try {
+          const bb = r.getBBox(); const vb = r.ownerSVGElement.viewBox.baseVal;
+          const x0 = bb.x / vb.width * 100, x1 = (bb.x + bb.width) / vb.width * 100;
+          const y0 = bb.y / vb.height * 100, y1 = (bb.y + bb.height) / vb.height * 100;
+          cx = (x0 + x1) / 2; cy = (y0 + y1) / 2;
+          const box = inner.getBoundingClientRect();
+          const needW = (x1 - x0) / 100 * box.width, needH = (y1 - y0) / 100 * box.height;
+          sc = Math.min(1, (innerWidth * .78) / Math.max(needW, 1), (innerHeight * .62) / Math.max(needH, 1));
+          sc = Math.max(sc, .38);
+        } catch (e) {}
+        tx = 50 - cx; ty = 50 - cy; mobScale = sc;
+      }
     }
   };
   const tick = y => {
@@ -990,9 +1029,32 @@ const map = (() => {
     if (prog && mdUp()) setIndex(Math.min(pins.length - 1, Math.floor(parseFloat(prog.dataset.progress || '0') * pins.length)));
     if (inner) {
       panX = lerp(panX, tx, .06); panY = lerp(panY, ty, .06);
-      inner.style.transform = `translate(${panX.toFixed(3)}%, ${panY.toFixed(3)}%)`;
+      shownScale = lerp(shownScale, mdUp() ? 1 : mobScale, .08);
+      // translate in % of the inner's own box, then scale about the centre so
+      // the fitted route stays where the translate put it
+      inner.style.transform = mdUp()
+        ? `translate(${panX.toFixed(3)}%, ${panY.toFixed(3)}%)`
+        : `translate(${panX.toFixed(3)}%, ${panY.toFixed(3)}%) scale(${shownScale.toFixed(4)})`;
     }
   };
+  /* Arrows. The index is a pure function of scroll on desktop, so a button that
+     only set it would be overwritten on the next frame; instead it scrolls to
+     the y where that stop becomes active. On touch the horizontal card rail is
+     the source of truth, so the same buttons page that rail. */
+  const cardSticky = $('.l-location__card-sticky');
+  const goTo = i => {
+    i = Math.max(0, Math.min(pins.length - 1, i));
+    if (mdUp()) {
+      if (!cardSticky) return;
+      const y = docTop(cardSticky) + i * VH * .57 + VH * .12;   // 57svh a quarter, see landingLocationMapProgress
+      scroller.tweenTo(y, 900, easeHouse);
+    } else if (mobile) {
+      const w = mobile.scrollWidth - mobile.clientWidth;
+      mobile.scrollTo({ left: w * i / Math.max(1, pins.length - 1), behavior: 'smooth' });
+    }
+  };
+  $$('.js-loc-prev').forEach(b => b.addEventListener('click', () => goTo(last - 1)));
+  $$('.js-loc-next').forEach(b => b.addEventListener('click', () => goTo(last + 1)));
   if (mobile) {
     const cards = $$('.l-location__mcard', mobile);
     mobile.addEventListener('scroll', () => {
@@ -1052,14 +1114,150 @@ const footerMask = (() => {
    is no card step to fake. Nothing is sent anywhere from here, no field is
    stored, and the confirmation says so in plain words. The markup is built once
    in JS so every page gets it without duplicating a slab of HTML.               */
+
+/* ============================================================
+   THE STAY PICKER
+   Ported from the shipped Aurora Hills StayPicker (React) to plain DOM, which
+   is the memory's instruction: copy the file, keep the behaviour, restyle to
+   this build. What it keeps: the three-rule click state machine (no clear
+   button, a third click restarts), past nights blocked, a range that crosses
+   a taken night refused with the reason said out loud, the minimum stay named
+   at selection, a taken date still legal as a CHECKOUT (you leave that
+   morning), hover-preview of the provisional range, two months side by side
+   above 620px and one below, always six rows, opening on a bookable month.
+
+   What it deliberately does NOT do here: mark any night as taken. Kerbyggð's
+   availability was not harvested, and a fabricated calendar is the one thing a
+   guest would test against the real one. Nothing is struck; the copy says
+   availability is confirmed on the next step. The dates leave with the guest
+   into Godo's own URL, which takes checkin_hide / checkout_hide / numnight,
+   so the picker hands off with everything already filled in.
+   ============================================================ */
+function mountStayPicker(root, form) {
+  if (!root) return;
+  // the modal is dark but carries no theme class, so the --t-* tokens would
+  // resolve to the light defaults on :root and paint ink on ink
+  root.classList.add('ui-dark');
+  const WD = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAY = 864e5;
+  const sod = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const addD = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const addM = (d, n) => new Date(d.getFullYear(), d.getMonth() + n, 1);
+  const nights = (a, b) => Math.round((b - a) / DAY);
+  // by DAY, never by getTime(): a clicked date is built at noon to dodge DST
+  // edges while grid cells sit at midnight, so time equality never matched
+  const same = (a, b) => !!a && !!b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  const key = d => `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;         // Godo's own Y-M-D, unpadded
+  const isoK = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const fmtS = d => `${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][(d.getDay() + 6) % 7]} ${d.getDate()} ${MONTHS[d.getMonth()].slice(0,3)}`;
+  const fmtL = d => `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  const MIN = +root.dataset.minStay || 1;
+  const today = sod(new Date());
+  // open on the month the guest can actually book in
+  const left = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate() - today.getDate();
+  let month = new Date(today.getFullYear(), today.getMonth() + (left < 7 ? 1 : 0), 1);
+  let start = null, end = null, hover = null, note = '';
+  const taken = () => false;                                  // no fabricated availability
+  const crosses = (a, b) => { for (let d = a; d < b; d = addD(d, 1)) if (taken(d)) return true; return false; };
+
+  const grid = m => { const first = new Date(m.getFullYear(), m.getMonth(), 1), lead = (first.getDay() + 6) % 7;
+    return Array.from({ length: 42 }, (_, i) => { const date = addD(first, i - lead); return { date, inMonth: date.getMonth() === m.getMonth() }; }); };
+
+  root.innerHTML = `
+    <div class="stay__cal">
+      <div class="stay__head">
+        <button type="button" class="stay__arrow js-prev" aria-label="Previous month"><span aria-hidden="true" class="stay__chev stay__chev--l"></span></button>
+        <p class="stay__months text-small" aria-live="polite"><span class="js-m1"></span><span class="stay__m2 js-m2"></span></p>
+        <button type="button" class="stay__arrow js-next" aria-label="Next month"><span aria-hidden="true" class="stay__chev stay__chev--r"></span></button>
+      </div>
+      <div class="stay__grids js-grids">
+        <div class="stay__grid js-g0"><div class="stay__dows" aria-hidden="true">${WD.map(w => `<span>${w}</span>`).join('')}</div><div class="stay__days js-d0" role="group"></div></div>
+        <div class="stay__grid stay__grid--2 js-g1"><div class="stay__dows" aria-hidden="true">${WD.map(w => `<span>${w}</span>`).join('')}</div><div class="stay__days js-d1" role="group"></div></div>
+      </div>
+    </div>
+    <div class="stay__read">
+      <div class="stay__cells">
+        <div class="stay__cell js-c-in"><span class="text-small">Check in</span><b>Pick a date</b></div>
+        <span class="stay__arrowline" aria-hidden="true"></span>
+        <div class="stay__cell js-c-out"><span class="text-small">Check out</span><b>After check in</b></div>
+      </div>
+      <div class="stay__sum js-sum" aria-live="polite"></div>
+      <p class="stay__note js-note" role="status" hidden></p>
+      <p class="stay__fine text-small">Availability is confirmed on the next step, in Kerbyggð's own booking. Nights are priced from the house chosen below.</p>
+    </div>`;
+
+  const els = { m1: $('.js-m1', root), m2: $('.js-m2', root), d: [$('.js-d0', root), $('.js-d1', root)], g: [$('.js-g0', root), $('.js-g1', root)],
+    grids: $('.js-grids', root), cin: $('.js-c-in b', root), cout: $('.js-c-out b', root), sum: $('.js-sum', root), note: $('.js-note', root),
+    prev: $('.js-prev', root), next: $('.js-next', root), inF: $('input[name="in"]', form), outF: $('input[name="out"]', form) };
+
+  const rateFor = () => { const r = $('input[name="room"]:checked', form); const lab = r && r.closest('label'); const p = lab && lab.dataset.price; return p ? +p.replace(/,/g, '') : 0; };
+  const houseName = () => { const r = $('input[name="room"]:checked', form); return r ? r.value : ''; };
+
+  const pick = day => {
+    day = sod(day);                                            // normalise to midnight, like the cells
+    if (day < today) return;
+    if (taken(day) && (!start || end)) { note = `${fmtL(day)} is already taken.`; return render(); }
+    if (!start || (start && end)) { start = day; end = null; note = ''; return render(); }          // rule 1: (re)start
+    if (day <= start) { start = day; end = null; note = ''; return render(); }                    // rule 2: earlier click = new start
+    if (crosses(start, day)) { note = 'There is a booked night inside those dates. Pick a checkout before it, or start later.'; return render(); }
+    if (nights(start, day) < MIN) { note = `The minimum stay is ${MIN} night${MIN > 1 ? 's' : ''}, so the earliest checkout is ${fmtL(addD(start, MIN))}.`; return render(); }
+    end = day; note = ''; render();                                                                // rule 3: complete
+  };
+
+  const render = () => {
+    const months = [month, addM(month, 1)];
+    els.m1.textContent = `${MONTHS[month.getMonth()]} ${month.getFullYear()}`;
+    els.m2.textContent = ` · ${MONTHS[months[1].getMonth()]} ${months[1].getFullYear()}`;
+    els.prev.disabled = !(month > new Date(today.getFullYear(), today.getMonth(), 1));
+    const previewEnd = start && !end && hover && hover > start ? hover : null;
+    const to = end || previewEnd;
+    els.grids.toggleAttribute('data-range', !!to);
+    months.forEach((m, mi) => {
+      els.d[mi].setAttribute('aria-label', `${MONTHS[m.getMonth()]} ${m.getFullYear()}`);
+      els.d[mi].innerHTML = grid(m).map(({ date, inMonth }) => {
+        const past = date < today, dead = past || !inMonth;
+        const isS = same(date, start), isE = same(date, end), mid = start && to && date > start && date < to;
+        const cls = ['stay__day', !inMonth && 'stay__day--out', past && 'stay__day--past', isS && 'stay__day--start', isE && 'stay__day--end', mid && 'stay__day--mid', same(date, today) && 'stay__day--today', previewEnd && !end && 'stay__day--drawing'].filter(Boolean).join(' ');
+        const label = `${fmtL(date)}${isS ? ', check in' : ''}${isE ? ', check out' : ''}`;
+        return `<button type="button" class="${cls}" ${dead ? 'disabled tabindex="-1"' : ''} data-k="${isoK(date)}" aria-label="${label}"${isS || isE ? ' aria-pressed="true"' : ''}><span>${date.getDate()}</span></button>`;
+      }).join('');
+    });
+    els.cin.textContent = start ? fmtS(start) : 'Pick a date';
+    els.cout.textContent = end ? fmtS(end) : start ? 'Pick a date' : 'After check in';
+    const n = start && end ? nights(start, end) : 0, rate = rateFor();
+    els.sum.innerHTML = n > 0
+      ? `<p class="stay__line"><span>${rate ? 'ISK ' + rate.toLocaleString('en-GB') : 'Rate'} x ${n} night${n > 1 ? 's' : ''}</span><span>${rate ? 'ISK ' + (rate * n).toLocaleString('en-GB') : ''}</span></p>
+         <p class="stay__total"><span class="text-small">${houseName()}</span><b>${rate ? 'ISK ' + (rate * n).toLocaleString('en-GB') : n + ' nights'}</b></p>`
+      : `<p class="stay__empty">Pick a check-in, then a checkout, and the total for your stay appears here.</p>`;
+    els.note.hidden = !note; els.note.textContent = note;
+    // the rest of the form reads these, and the Godo handoff below reads them too
+    els.inF.value = start ? isoK(start) : ''; els.outF.value = end ? isoK(end) : '';
+    els.inF.dispatchEvent(new Event('input', { bubbles: true }));
+    const go = $('[data-godo]', form);
+    if (go) go.href = start && end
+      ? `https://property.godo.is/book-kerbyggd?checkin_hide=${key(start)}&checkout_hide=${key(end)}&numnight=${n}`
+      : 'https://property.godo.is/book-kerbyggd';
+  };
+
+  root.addEventListener('click', e => { const b = e.target.closest('.stay__day'); if (b && !b.disabled) pick(new Date(b.dataset.k + 'T12:00:00')); });
+  root.addEventListener('pointerover', e => { const b = e.target.closest('.stay__day'); if (b && !b.disabled) { hover = sod(new Date(b.dataset.k + 'T12:00:00')); if (start && !end) render(); } });
+  root.addEventListener('focusin', e => { const b = e.target.closest('.stay__day'); if (b) { hover = sod(new Date(b.dataset.k + 'T12:00:00')); if (start && !end) render(); } });
+  els.grids.addEventListener('pointerleave', () => { hover = null; if (start && !end) render(); });
+  els.prev.addEventListener('click', () => { month = addM(month, -1); render(); });
+  els.next.addEventListener('click', () => { month = addM(month, 1); render(); });
+  form.addEventListener('change', e => { if (e.target.name === 'room') render(); });
+  render();
+}
+
 const booking = (() => {
   const triggers = $$('[data-booking]');
   if (!triggers.length) return;
   const ROOMS = [
-    { name: 'Three bedroom', note: '93 m² · sleeps 6 · one bathroom' },
-    { name: 'Three with tub', note: '93 m² · sleeps 6 · private hot tub' },
-    { name: 'Superior two', note: '93 m² · sleeps 5 · two ensuites · hot tub' },
-    { name: 'The suite', note: '93 m² · sleeps 4 · two ensuites · hot tub' },
+    { name: 'Three bedroom', note: '93 m² · sleeps 6 · one bathroom', price: '69,700' },
+    { name: 'Three with tub', note: '93 m² · sleeps 6 · private hot tub', price: '76,700' },
+    { name: 'Superior two', note: '93 m² · sleeps 5 · two ensuites · hot tub', price: '83,800' },
+    { name: 'The suite', note: '93 m² · sleeps 4 · two ensuites · hot tub', price: '85,900' },
   ];
   let el = null, room = 1, prevFocus = null;
   const iso = (d) => d.toISOString().slice(0, 10);
@@ -1081,16 +1279,16 @@ const booking = (() => {
             <p class="bk__lead">Booked here rather than through a platform: the sparkling wine on arrival, ten percent off over four days, and no commission off the top.</p>
           </div>
           <form class="bk__form" novalidate>
+            <input type="hidden" name="in" value=""><input type="hidden" name="out" value="">
+            <div class="stay js-stay" data-min-stay="1"></div>
             <div class="bk__row">
-              <label class="bk__f"><span class="text-small">Arriving</span><input type="date" name="in" value="${iso(inD)}" min="${iso(today)}"></label>
-              <label class="bk__f"><span class="text-small">Leaving</span><input type="date" name="out" value="${iso(outD)}" min="${iso(today)}"></label>
               <label class="bk__f bk__f--n"><span class="text-small">Guests</span><input type="number" name="guests" min="1" max="6" value="2"></label>
             </div>
             <p class="bk__nights text-small" data-nights></p>
             <fieldset class="bk__rooms">
               <legend class="text-small">House</legend>
               ${ROOMS.map((r, i) => `
-                <label class="bk__room${i === 1 ? ' is-on' : ''}">
+                <label class="bk__room${i === 1 ? ' is-on' : ''}" data-price="${r.price || ''}">
                   <input type="radio" name="room" value="${r.name}"${i === 1 ? ' checked' : ''}>
                   <span class="bk__room-n h3">${r.name}</span>
                   <span class="bk__room-d text-small">${r.note}</span>
@@ -1103,7 +1301,7 @@ const booking = (() => {
             <label class="bk__f bk__f--w"><span class="text-small">Anything we should know</span><textarea name="note" rows="2" placeholder="Late arrival, a travel cot, the hot tub heated for nine…"></textarea></label>
             <div class="bk__actions">
               <button type="submit" class="btn btn--primary">Send request</button>
-              <a class="btn btn--underline" href="https://property.godo.is/book-kerbyggd" target="_blank" rel="noopener"><span class="btn__underline">Kerbyggð’s current booking</span></a>
+              <a class="btn btn--underline" data-godo href="https://property.godo.is/book-kerbyggd" target="_blank" rel="noopener"><span class="btn__underline">Continue in Kerbyggð’s booking</span></a>
             </div>
             <p class="bk__fine text-small">A demonstration of the SNDR booking engine. Nothing is sent and nothing is stored.</p>
           </form>
@@ -1118,6 +1316,7 @@ const booking = (() => {
         </div>
       </div>`;
     document.body.appendChild(el);
+    mountStayPicker($('.js-stay', el), el);
     const form = $('.bk__form', el), done = $('.bk__done', el);
     const nights = () => {
       const a = new Date(form.in.value), b = new Date(form.out.value);
